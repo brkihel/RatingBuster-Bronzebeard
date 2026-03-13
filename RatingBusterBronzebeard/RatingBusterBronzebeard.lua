@@ -1,6 +1,6 @@
 --[[
-Name: RatingBuster
-Description: Converts combat ratings in tooltips into normal percentages.
+Name: RatingBusterBronzebeard
+Description: Converts combat ratings in tooltips into normal percentages for Ascension.gg/Bronzebeard
 Revision: $Revision: 284 $
 Author: Whitetooth
 Email: hotdogee [at] gmail [dot] com
@@ -16,7 +16,7 @@ local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local AceDB = LibStub("AceDB-3.0")
 local TipHooker = LibStub("LibTipHooker-1.1")
 local StatLogic = LibStub("LibStatLogic-1.1")
-local L = LibStub("AceLocale-3.0"):GetLocale("RatingBuster")
+local L = LibStub("AceLocale-3.0"):GetLocale("RatingBusterBronzebeard")
 local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
 
 
@@ -24,9 +24,9 @@ local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
 -- AceAddon Setup --
 --------------------
 -- AceAddon Initialization
-RatingBuster = LibStub("AceAddon-3.0"):NewAddon("RatingBuster", "AceConsole-3.0", "AceEvent-3.0")
-RatingBuster.version = "1.5.0 (r" .. gsub("$Revision: 284 $", "$Revision: (%d+) %$", "%1") .. ")"
-RatingBuster.date = gsub("$Date: 2010-04-28 03:39:19 +0000 (Wed, 28 Apr 2010) $", "^.-(%d%d%d%d%-%d%d%-%d%d).-$", "%1")
+RatingBusterBronzebeard = LibStub("AceAddon-3.0"):NewAddon("RatingBusterBronzebeard", "AceConsole-3.0", "AceEvent-3.0")
+RatingBusterBronzebeard.version = "1.5.0 (r" .. gsub("$Revision: 284 $", "$Revision: (%d+) %$", "%1") .. ")"
+RatingBusterBronzebeard.date = gsub("$Date: 2010-04-28 03:39:19 +0000 (Wed, 28 Apr 2010) $", "^.-(%d%d%d%d%-%d%d%-%d%d).-$", "%1")
 
 
 -----------
@@ -41,7 +41,7 @@ local function clearCache()
 end
 
 --debug
---RatingBuster.cache = cache
+--RatingBusterBronzebeard.cache = cache
 
 
 ---------------------
@@ -569,7 +569,7 @@ end
 local function setProfileOptionAndClearCache(info, value)
 	profileDB[info.arg] = value
 	if info.uiType == "cmd" then
-		RatingBuster:Print(L["|cffffff7f%s|r is now set to |cffffff7f[%s]|r"]:format(info.option.name, tostring(value)))
+		RatingBusterBronzebeard:Print(L["|cffffff7f%s|r is now set to |cffffff7f[%s]|r"]:format(info.option.name, tostring(value)))
 	end
 	clearCache()
 end
@@ -610,12 +610,12 @@ local function setGem(info, value)
 		clearCache()
 		-- Is option set by AceConfigCmd or AceConfigDialog?
 		--if not debugstack():find("AceConfigCmd") then
-		RatingBuster:Print(L["|cffffff7f%s|r is now set to |cffffff7f[%s]|r"]:format(info.option.name, link))
+		RatingBusterBronzebeard:Print(L["|cffffff7f%s|r is now set to |cffffff7f[%s]|r"]:format(info.option.name, link))
 		--end
 	elseif gemID == false then -- invalid input
-		RatingBuster:Print(L["Invalid input: %s. ItemID or ItemLink required."]:format(value))
+		RatingBusterBronzebeard:Print(L["Invalid input: %s. ItemID or ItemLink required."]:format(value))
 	else -- query sent
-		RatingBuster:Print(L["Queried server for Gem: %s. Try again in 5 secs."]:format(value))
+		RatingBusterBronzebeard:Print(L["Queried server for Gem: %s. Try again in 5 secs."]:format(value))
 	end
 end
 
@@ -637,7 +637,7 @@ local options = {
 					name = L["Options Window"],
 					desc = L["Shows the Options Window"],
 					func = function()
-						RatingBuster:ShowConfig()
+						RatingBusterBronzebeard:ShowConfig()
 					end,
 					guiHidden = true,
 				},
@@ -647,12 +647,12 @@ local options = {
 					width = "double",
 					name = L["Enabled"],
 					desc = L["Suspend/resume this addon"],
-					get = function() return RatingBuster:IsEnabled() end,
+					get = function() return RatingBusterBronzebeard:IsEnabled() end,
 					set = function()
-						if RatingBuster:IsEnabled() then
-							RatingBuster:Disable()
+						if RatingBusterBronzebeard:IsEnabled() then
+							RatingBusterBronzebeard:Disable()
 						else
-							RatingBuster:Enable()
+							RatingBusterBronzebeard:Enable()
 						end
 					end,
 				},
@@ -2072,8 +2072,8 @@ local options = {
 							get = function() return profileDB.sumGem2Toggle end,
 							set = function(info, value)
 								if value ~= 4 and value == profileDB.sumGem3Toggle then
-									AceConfigRegistry:NotifyChange("RatingBuster")
-									RatingBuster:Print(L["Can't use the same modifier as Gem Set 3"])
+									AceConfigRegistry:NotifyChange("RatingBusterBronzebeard")
+									RatingBusterBronzebeard:Print(L["Can't use the same modifier as Gem Set 3"])
 								else
 									profileDB.sumGem2Toggle = value
 								end
@@ -2152,8 +2152,8 @@ local options = {
 							get = function() return profileDB.sumGem3Toggle end,
 							set = function(info, value)
 								if value ~= 4 and value == profileDB.sumGem2Toggle then
-									AceConfigRegistry:NotifyChange("RatingBuster")
-									RatingBuster:Print(L["Can't use the same modifier as Gem Set 2"])
+									AceConfigRegistry:NotifyChange("RatingBusterBronzebeard")
+									RatingBusterBronzebeard:Print(L["Can't use the same modifier as Gem Set 2"])
 								else
 									profileDB.sumGem3Toggle = value
 								end
@@ -2559,7 +2559,7 @@ elseif class == "DEATHKNIGHT" then
 	}
 end
 
-function RatingBuster:SetupOptions()
+function RatingBusterBronzebeard:SetupOptions()
 	-- Inject profile options
 	options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	options.args.profile.order = -2
@@ -2567,25 +2567,25 @@ function RatingBuster:SetupOptions()
 	-- Add dual-spec support
 	local LibDualSpec = LibStub("LibDualSpec-1.0", true)
 	if LibDualSpec then
-		LibDualSpec:EnhanceDatabase(self.db, "RatingBuster")
+		LibDualSpec:EnhanceDatabase(self.db, "RatingBusterBronzebeard")
 		LibDualSpec:EnhanceOptions(options.args.profile, self.db)
 	end
 
 	-- Register options table
-	AceConfig:RegisterOptionsTable("RatingBuster", options, { "rb", "rabu", "ratingbuster" })
+	AceConfig:RegisterOptionsTable("RatingBusterBronzebeard", options, { "rbb" }) -- cba to rename the other slashcommands.
 
 	-- Setup Blizzard option frames
 	self.optionsFrames = {}
 	-- The ordering here matters, it determines the order in the Blizzard Interface Options
-	self.optionsFrames.general = AceConfigDialog:AddToBlizOptions("RatingBuster", nil, nil, "general")
-	self.optionsFrames.rating = AceConfigDialog:AddToBlizOptions("RatingBuster", L["Rating"], "RatingBuster", "rating")
-	self.optionsFrames.stat = AceConfigDialog:AddToBlizOptions("RatingBuster", L["Stat Breakdown"], "RatingBuster", "stat")
-	self.optionsFrames.sum = AceConfigDialog:AddToBlizOptions("RatingBuster", L["Stat Summary"], "RatingBuster", "sum")
-	self.optionsFrames.profile = AceConfigDialog:AddToBlizOptions("RatingBuster", L["Profiles"], "RatingBuster", "profile")
-	--self.optionsFrames.help = AceConfigDialog:AddToBlizOptions("RatingBuster", L["Help File"], "RatingBuster", "Help")
+	self.optionsFrames.general = AceConfigDialog:AddToBlizOptions("RatingBusterBronzebeard", nil, nil, "general")
+	self.optionsFrames.rating = AceConfigDialog:AddToBlizOptions("RatingBusterBronzebeard", L["Rating"], "RatingBusterBronzebeard", "rating")
+	self.optionsFrames.stat = AceConfigDialog:AddToBlizOptions("RatingBusterBronzebeard", L["Stat Breakdown"], "RatingBusterBronzebeard", "stat")
+	self.optionsFrames.sum = AceConfigDialog:AddToBlizOptions("RatingBusterBronzebeard", L["Stat Summary"], "RatingBusterBronzebeard", "sum")
+	self.optionsFrames.profile = AceConfigDialog:AddToBlizOptions("RatingBusterBronzebeard", L["Profiles"], "RatingBusterBronzebeard", "profile")
+	--self.optionsFrames.help = AceConfigDialog:AddToBlizOptions("RatingBusterBronzebeard", L["Help File"], "RatingBusterBronzebeard", "Help")
 end
 
-function RatingBuster:ShowConfig()
+function RatingBusterBronzebeard:ShowConfig()
 	-- Open the profiles tab before, so the menu expands
 	InterfaceOptionsFrame_OpenToCategory(self.optionsFrames.profile)
 	InterfaceOptionsFrame_OpenToCategory(self.optionsFrames.general)
@@ -2633,11 +2633,11 @@ end
 ---------
 -- API --
 ---------
-function RatingBuster:GetStatMod(stat, school, talentGroup)
+function RatingBusterBronzebeard:GetStatMod(stat, school, talentGroup)
 	return StatLogic:GetStatMod(stat, school, talentGroup)
 end
 
-function RatingBuster:ClearCache()
+function RatingBusterBronzebeard:ClearCache()
 	clearCache()
 end
 
@@ -2652,16 +2652,16 @@ PLAYER_LOGIN - Most information about the game world should now be available to 
 }
 --]]
 
-function RatingBuster:OnProfileChanged(event, database, newProfileKey)
+function RatingBusterBronzebeard:OnProfileChanged(event, database, newProfileKey)
 	-- this is called every time our profile changes (after the change)
 	profileDB = database.profile
 	clearCache()
 end
 
 -- OnInitialize(name) called at ADDON_LOADED
-function RatingBuster:OnInitialize()
+function RatingBusterBronzebeard:OnInitialize()
 	-- Create DB
-	self.db = AceDB:New("RatingBusterDB", defaults)
+	self.db = AceDB:New("RatingBusterBronzebeardDB", defaults)
 	self.db.RegisterCallback(self, "OnProfileChanged", "OnProfileChanged")
 	self.db.RegisterCallback(self, "OnProfileCopied", "OnProfileChanged")
 	self.db.RegisterCallback(self, "OnProfileReset", "OnProfileChanged")
@@ -2677,7 +2677,7 @@ function RatingBuster:OnInitialize()
 end
 
 -- OnEnable() called at PLAYER_LOGIN
-function RatingBuster:OnEnable()
+function RatingBusterBronzebeard:OnEnable()
 	-- Hook item tooltips
 	TipHooker:Hook(self.ProcessTooltip, "item")
 	-- Initialize playerLevel
@@ -2690,27 +2690,27 @@ function RatingBuster:OnEnable()
 	self:RegisterEvent("UNIT_AURA") -- fire at most once every 1 second
 end
 
-function RatingBuster:OnDisable()
+function RatingBusterBronzebeard:OnDisable()
 	-- Unhook item tooltips
 	TipHooker:Unhook(self.ProcessTooltip, "item")
 end
 
 -- event = PLAYER_LEVEL_UP
 -- arg1 = New player level
-function RatingBuster:PLAYER_LEVEL_UP(event, newlevel)
+function RatingBusterBronzebeard:PLAYER_LEVEL_UP(event, newlevel)
 	playerLevel = newlevel
 	clearCache()
 end
 
 -- event = UNIT_AURA
 -- arg1 = the UnitID of the entity
-function RatingBuster:UNIT_AURA(event, unit)
+function RatingBusterBronzebeard:UNIT_AURA(event, unit)
 	if unit ~= "player" then return end
 	clearCache()
 end
 
 --local tooltips = {}
-function RatingBuster:MODIFIER_STATE_CHANGED(event, key, state)
+function RatingBusterBronzebeard:MODIFIER_STATE_CHANGED(event, key, state)
 	-- self:Print("MODIFIER_STATE_CHANGED")
 	-- for tooltip, link in pairs(tooltips) do
 	-- if tooltip:IsShown() and not strfind(tooltip:GetName(), "ompar") and not strfind(tooltip:GetName(), "Shopping") then
@@ -2759,9 +2759,9 @@ local isModifierKeyDown = {
 	[2] = IsControlKeyDown,
 	[3] = IsShiftKeyDown,
 }
-function RatingBuster.ProcessTooltip(tooltip, name, link, ...)
+function RatingBusterBronzebeard.ProcessTooltip(tooltip, name, link, ...)
 	-- Check if we're in standby mode
-	if not RatingBuster:IsEnabled() then return end
+	if not RatingBusterBronzebeard:IsEnabled() then return end
 	--tooltips[tooltip] = link
 	---------------------------
 	-- Set calculation level --
@@ -2772,7 +2772,7 @@ function RatingBuster.ProcessTooltip(tooltip, name, link, ...)
 	end
 	if profileDB.useRequiredLevel and link then
 		local _, _, _, _, reqLevel = GetItemInfo(link)
-		--RatingBuster:Print(link..", "..calcLevel)
+		--RatingBusterBronzebeard:Print(link..", "..calcLevel)
 		if reqLevel and calcLevel < reqLevel then
 			calcLevel = reqLevel
 		end
@@ -2802,8 +2802,8 @@ function RatingBuster.ProcessTooltip(tooltip, name, link, ...)
 		local _, mainlink, difflink1, difflink2 = StatLogic:GetDiffID(tooltip, profileDB.sumIgnoreEnchant,
 			profileDB.sumIgnoreGems, red, yellow, blue, meta, profileDB.sumIgnorePris)
 		StatLogic:GetSum(difflink1, equippedSum)
-		equippedSum["STR"] = (equippedSum["STR"] or 0) * RatingBuster:GetStatMod("MOD_STR")
-		equippedSum["AGI"] = (equippedSum["AGI"] or 0) * RatingBuster:GetStatMod("MOD_AGI")
+		equippedSum["STR"] = (equippedSum["STR"] or 0) * RatingBusterBronzebeard:GetStatMod("MOD_STR")
+		equippedSum["AGI"] = (equippedSum["AGI"] or 0) * RatingBusterBronzebeard:GetStatMod("MOD_AGI")
 		equippedDodge = summaryFunc["DODGE_NO_DR"](equippedSum, "sum", difflink1) * -1
 		equippedParry = summaryFunc["PARRY_NO_DR"](equippedSum, "sum", difflink1) * -1
 		equippedMissed = summaryFunc["MELEE_HIT_AVOID_NO_DR"](equippedSum, "sum", difflink1) * -1
@@ -2865,7 +2865,7 @@ function RatingBuster.ProcessTooltip(tooltip, name, link, ...)
 					end
 				end
 				-- SplitDoJoin
-				text = RatingBuster:SplitDoJoin(text, separatorTable, tooltip)
+				text = RatingBusterBronzebeard:SplitDoJoin(text, separatorTable, tooltip)
 				cache[cacheID] = text
 				-- SetText
 				fontString:SetText(text)
@@ -2952,7 +2952,7 @@ function RatingBuster.ProcessTooltip(tooltip, name, link, ...)
 	-- Expertise - EXPERTISE_RATING
 	--]]
 	if isModifierKeyDown[profileDB.showSum] and isModifierKeyDown[profileDB.showSum]() then
-		RatingBuster:StatSummary(tooltip, name, link, ...)
+		RatingBusterBronzebeard:StatSummary(tooltip, name, link, ...)
 	end
 	---------------------
 	-- Repaint tooltip --
@@ -2966,9 +2966,9 @@ end
 ---------------------------------------------------------------------------------
 -- text = "+24 Agility/+4 Stamina and +4 Spell Crit/+5 Spirit"
 -- separatorTable = {"/", " and ", ","}
--- RatingBuster:SplitDoJoin("+24 Agility/+4 Stamina, +4 Dodge and +4 Spell Crit/+5 Spirit", {"/", " and ", ",", "%. ", " for ", "&"})
--- RatingBuster:SplitDoJoin("+6法術傷害及5耐力", {"/", "和", ",", "。", " 持續 ", "&", "及",})
-function RatingBuster:SplitDoJoin(text, separatorTable, tooltip)
+-- RatingBusterBronzebeard:SplitDoJoin("+24 Agility/+4 Stamina, +4 Dodge and +4 Spell Crit/+5 Spirit", {"/", " and ", ",", "%. ", " for ", "&"})
+-- RatingBusterBronzebeard:SplitDoJoin("+6法術傷害及5耐力", {"/", "和", ",", "。", " 持續 ", "&", "及",})
+function RatingBusterBronzebeard:SplitDoJoin(text, separatorTable, tooltip)
 	if type(separatorTable) == "table" and table.maxn(separatorTable) > 0 then
 		local sep = tremove(separatorTable, 1)
 		text = gsub(text, sep, "@")
@@ -2988,7 +2988,7 @@ function RatingBuster:SplitDoJoin(text, separatorTable, tooltip)
 	end
 end
 
-function RatingBuster:ProcessText(text, tooltip)
+function RatingBusterBronzebeard:ProcessText(text, tooltip)
 	--self:Print(text)
 	-- Check if test has a matching pattern
 	for _, num in ipairs(L["numberPatterns"]) do
@@ -3013,7 +3013,7 @@ function RatingBuster:ProcessText(text, tooltip)
 						--------------------
 						-- Calculate stat value
 						local effect, strID = StatLogic:GetEffectFromRating(value, stat.id, calcLevel)
-						--self:Print(reversedAmount..", "..amount..", "..v[2]..", "..RatingBuster.targetLevel)-- debug
+						--self:Print(reversedAmount..", "..amount..", "..v[2]..", "..RatingBusterBronzebeard.targetLevel)-- debug
 						-- If rating is resilience, add a minus sign
 						-- (d0.12%, p0.12%, b0.12%, m0.12%, c-0.12%)
 						if strID == "DEFENSE" and profileDB.defBreakDown then
@@ -3107,12 +3107,12 @@ function RatingBuster:ProcessText(text, tooltip)
 						--------------
 						local statmod = 1
 						if profileDB.enableStatMods then
-							statmod = RatingBuster:GetStatMod("MOD_STR")
+							statmod = RatingBusterBronzebeard:GetStatMod("MOD_STR")
 							value = value * statmod
 						end
 						local infoTable = {}
 						if profileDB.showAPFromStr then
-							local mod = RatingBuster:GetStatMod("MOD_AP")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP")
 							local effect = value * StatLogic:GetAPPerStr(class) * mod
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value AP"], "$value", format("%+.1f", effect))))
@@ -3121,7 +3121,7 @@ function RatingBuster:ProcessText(text, tooltip)
 							end
 						end
 						if profileDB.showBlockValueFromStr then
-							--local effect = value * StatLogic:GetBlockValuePerStr(class) * RatingBuster:GetStatMod("MOD_BLOCK_VALUE")
+							--local effect = value * StatLogic:GetBlockValuePerStr(class) * RatingBusterBronzebeard:GetStatMod("MOD_BLOCK_VALUE")
 							--if floor(abs(effect) * 10 + 0.5) > 0 then
 							--	tinsert(infoTable, (gsub(L["$value Block"], "$value", format("%+.1f", effect))))
 							--end
@@ -3169,9 +3169,9 @@ function RatingBuster:ProcessText(text, tooltip)
 						-- Shaman: Mental Quickness (Rank 3) - 2,15
 						-- Paladin: Sheath of Light
 						if profileDB.showSpellDmgFromStr then
-							local mod = RatingBuster:GetStatMod("MOD_AP") * RatingBuster:GetStatMod("MOD_SPELL_DMG")
-							local effect = (value * StatLogic:GetAPPerStr(class) * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_AP")
-									+ value * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STR")) * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP") * RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
+							local effect = (value * StatLogic:GetAPPerStr(class) * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_AP")
+									+ value * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STR")) * mod
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Dmg"], "$value", format("%+.1f", effect))))
 							elseif floor(abs(effect) + 0.5) > 0 then
@@ -3181,9 +3181,9 @@ function RatingBuster:ProcessText(text, tooltip)
 						-- Shaman: Mental Quickness (Rank 3) - 2,15
 						-- Paladin: Sheath of Light
 						if profileDB.showHealingFromStr then
-							local mod = RatingBuster:GetStatMod("MOD_AP") * RatingBuster:GetStatMod("MOD_HEALING")
-							local effect = (value * StatLogic:GetAPPerStr(class) * RatingBuster:GetStatMod("ADD_HEALING_MOD_AP")
-									+ value * RatingBuster:GetStatMod("ADD_HEALING_MOD_STR")) * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP") * RatingBusterBronzebeard:GetStatMod("MOD_HEALING")
+							local effect = (value * StatLogic:GetAPPerStr(class) * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_AP")
+									+ value * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_STR")) * mod
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Heal"], "$value", format("%+.1f", effect))))
 							elseif floor(abs(effect) + 0.5) > 0 then
@@ -3191,7 +3191,7 @@ function RatingBuster:ProcessText(text, tooltip)
 							end
 						end
 						if profileDB.showParryFromStr then -- Death Knight: Forceful Deflection - Passive
-							local rating = value * RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR")
+							local rating = value * RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR")
 							local effect = StatLogic:GetEffectFromRating(rating, 4, calcLevel)
 							if profileDB.enableAvoidanceDiminishingReturns then
 								local effectNoDR = effect
@@ -3203,7 +3203,7 @@ function RatingBuster:ProcessText(text, tooltip)
 								tinsert(infoTable, (gsub(L["$value% Parry"], "$value", format("%+.2f", effect))))
 							end
 						else
-							local rating = value * RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR")
+							local rating = value * RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR")
 							local effect = StatLogic:GetEffectFromRating(rating, 4, calcLevel)
 							processedParry = processedParry + effect
 						end
@@ -3215,12 +3215,12 @@ function RatingBuster:ProcessText(text, tooltip)
 						-------------
 						local statmod = 1
 						if profileDB.enableStatMods then
-							statmod = RatingBuster:GetStatMod("MOD_AGI")
+							statmod = RatingBusterBronzebeard:GetStatMod("MOD_AGI")
 							value = value * statmod
 						end
 						local infoTable = {}
 						if profileDB.showAPFromAgi then
-							local mod = RatingBuster:GetStatMod("MOD_AP")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP")
 							local effect = value * StatLogic:GetAPPerAgi(class) * mod
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value AP"], "$value", format("%+.1f", effect))))
@@ -3229,7 +3229,7 @@ function RatingBuster:ProcessText(text, tooltip)
 							end
 						end
 						if profileDB.showRAPFromAgi then
-							local mod = RatingBuster:GetStatMod("MOD_RANGED_AP")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_RANGED_AP")
 							local effect = value * StatLogic:GetRAPPerAgi(class) * mod
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value RAP"], "$value", format("%+.1f", effect))))
@@ -3271,8 +3271,8 @@ function RatingBuster:ProcessText(text, tooltip)
 							end
 						end
 						if profileDB.showHealingFromAgi then
-							local mod = RatingBuster:GetStatMod("MOD_HEALING")
-							local effect = value * RatingBuster:GetStatMod("ADD_HEALING_MOD_AGI") * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_HEALING")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_AGI") * mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Heal"], "$value", format("%+.1f", effect))))
 							end
@@ -3306,12 +3306,12 @@ function RatingBuster:ProcessText(text, tooltip)
 						-------------
 						local statmod = 1
 						if profileDB.enableStatMods then
-							statmod = RatingBuster:GetStatMod("MOD_STA")
+							statmod = RatingBusterBronzebeard:GetStatMod("MOD_STA")
 							value = value * statmod
 						end
 						local infoTable = {}
 						if profileDB.showHealthFromSta then
-							local mod = RatingBuster:GetStatMod("MOD_HEALTH")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_HEALTH")
 							local effect = value * 10 * mod -- 10 Health per Sta
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value HP"], "$value", format("%+.1f", effect))))
@@ -3321,24 +3321,24 @@ function RatingBuster:ProcessText(text, tooltip)
 						end
 						-- "ADD_SPELL_DMG_MOD_AP" -- Warlock: Demonic Knowledge
 						if profileDB.showSpellDmgFromSta then
-							local mod = RatingBuster:GetStatMod("MOD_SPELL_DMG")
-							local effect = value * mod * (RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STA")
-									+ RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_PET_STA") * RatingBuster:GetStatMod("ADD_PET_STA_MOD_STA"))
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
+							local effect = value * mod * (RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STA")
+									+ RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_PET_STA") * RatingBusterBronzebeard:GetStatMod("ADD_PET_STA_MOD_STA"))
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Dmg"], "$value", format("%+.1f", effect))))
 							end
 						end
 						-- "ADD_HEALING_MOD_STA" -- Warlock: Demonic Knowledge
 						if profileDB.showHealingFromSta then
-							local mod = RatingBuster:GetStatMod("MOD_HEALING")
-							local effect = value * RatingBuster:GetStatMod("ADD_HEALING_MOD_STA") * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_HEALING")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_STA") * mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Heal"], "$value", format("%+.1f", effect))))
 							end
 						end
 						-- "ADD_AP_MOD_STA" -- Hunter: Hunter vs. Wild
 						if profileDB.showHunterVSWild then
-							local mod = RatingBuster:GetStatMod("MOD_AP")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP")
 							local effect = value * 0.2
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value AP"], "$value", format("%+.1f", effect))))
@@ -3354,12 +3354,12 @@ function RatingBuster:ProcessText(text, tooltip)
 						---------------
 						local statmod = 1
 						if profileDB.enableStatMods then
-							statmod = RatingBuster:GetStatMod("MOD_INT")
+							statmod = RatingBusterBronzebeard:GetStatMod("MOD_INT")
 							value = value * statmod
 						end
 						local infoTable = {}
 						if profileDB.showManaFromInt then
-							local mod = RatingBuster:GetStatMod("MOD_MANA")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_MANA")
 							local effect = value * 15 * mod -- 15 Mana per Int
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value MP"], "$value", format("%+.1f", effect))))
@@ -3374,16 +3374,16 @@ function RatingBuster:ProcessText(text, tooltip)
 							end
 						end
 						if profileDB.showSpellDmgFromInt then
-							local mod = RatingBuster:GetStatMod("MOD_SPELL_DMG")
-							local effect = value * mod * (RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_INT")
-									+ RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_PET_INT") * RatingBuster:GetStatMod("ADD_PET_INT_MOD_INT"))
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
+							local effect = value * mod * (RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_INT")
+									+ RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_PET_INT") * RatingBusterBronzebeard:GetStatMod("ADD_PET_INT_MOD_INT"))
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Dmg"], "$value", format("%+.1f", effect))))
 							end
 						end
 						if profileDB.showHealingFromInt then
-							local mod = RatingBuster:GetStatMod("MOD_HEALING")
-							local effect = value * RatingBuster:GetStatMod("ADD_HEALING_MOD_INT") * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_HEALING")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_INT") * mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Heal"], "$value", format("%+.1f", effect))))
 							end
@@ -3391,11 +3391,11 @@ function RatingBuster:ProcessText(text, tooltip)
 						if profileDB.showMP5FromInt then
 							local _, int = UnitStat("player", 4)
 							local _, spi = UnitStat("player", 5)
-							local effect = value * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_INT")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_INT")
 									+ (StatLogic:GetNormalManaRegenFromSpi(spi, int + value, calcLevel)
 											- StatLogic:GetNormalManaRegenFromSpi(spi, int, calcLevel)) *
-									RatingBuster:GetStatMod("ADD_MANA_REG_MOD_NORMAL_MANA_REG")
-									+ value * 15 * RatingBuster:GetStatMod("MOD_MANA") * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_MANA") -- Replenishment
+									RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_NORMAL_MANA_REG")
+									+ value * 15 * RatingBusterBronzebeard:GetStatMod("MOD_MANA") * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_MANA") -- Replenishment
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value MP5"], "$value", format("%+.1f", effect))))
 							end
@@ -3403,31 +3403,31 @@ function RatingBuster:ProcessText(text, tooltip)
 						if profileDB.showMP5NCFromInt then
 							local _, int = UnitStat("player", 4)
 							local _, spi = UnitStat("player", 5)
-							local effect = value * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_INT")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_INT")
 									+ StatLogic:GetNormalManaRegenFromSpi(spi, int + value, calcLevel)
 									- StatLogic:GetNormalManaRegenFromSpi(spi, int, calcLevel)
-									+ value * 15 * RatingBuster:GetStatMod("MOD_MANA") * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_MANA")
+									+ value * 15 * RatingBusterBronzebeard:GetStatMod("MOD_MANA") * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_MANA")
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value MP5(NC)"], "$value", format("%+.1f", effect))))
 							end
 						end
 						if profileDB.showRAPFromInt then
-							local mod = RatingBuster:GetStatMod("MOD_RANGED_AP")
-							local effect = value * RatingBuster:GetStatMod("ADD_RANGED_AP_MOD_INT") * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_RANGED_AP")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_RANGED_AP_MOD_INT") * mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value RAP"], "$value", format("%+.1f", effect))))
 							end
 						end
 						if profileDB.showArmorFromInt then
-							local effect = value * RatingBuster:GetStatMod("ADD_ARMOR_MOD_INT")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_ARMOR_MOD_INT")
 							if floor(abs(effect) + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Armor"], "$value", format("%+.0f", effect))))
 							end
 						end
 						-- "ADD_AP_MOD_INT" -- Shaman: Mental Dexterity
 						if profileDB.showAPFromInt then
-							local mod = RatingBuster:GetStatMod("MOD_AP")
-							local effect = value * RatingBuster:GetStatMod("ADD_AP_MOD_INT") * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_INT") * mod
 							if (mod ~= 1 or statmod ~= 1) and floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value AP"], "$value", format("%+.1f", effect))))
 							elseif floor(abs(effect) + 0.5) > 0 then
@@ -3442,12 +3442,12 @@ function RatingBuster:ProcessText(text, tooltip)
 						------------
 						local statmod = 1
 						if profileDB.enableStatMods then
-							statmod = RatingBuster:GetStatMod("MOD_SPI")
+							statmod = RatingBusterBronzebeard:GetStatMod("MOD_SPI")
 							value = value * statmod
 						end
 						local infoTable = {}
 						if profileDB.showMP5FromSpi then
-							local mod = RatingBuster:GetStatMod("ADD_MANA_REG_MOD_NORMAL_MANA_REG")
+							local mod = RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_NORMAL_MANA_REG")
 							local effect = StatLogic:GetNormalManaRegenFromSpi(value, nil, calcLevel) * mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value MP5"], "$value", format("%+.1f", effect))))
@@ -3467,23 +3467,23 @@ function RatingBuster:ProcessText(text, tooltip)
 						end
 						-- "ADD_SCHOOL_SP_MOD_SPI" -- Priest: Twisted Faith,  Warlock: Fel Armor
 						if profileDB.showSpellDmgFromSpi then
-							local mod = RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 							local effect = value *
-									(RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_SPI") + RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "SHADOW"))
+									(RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_SPI") + RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "SHADOW"))
 									* mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Dmg"], "$value", format("%+.1f", effect))))
 							end
 						end
 						if profileDB.showHealingFromSpi then
-							local mod = RatingBuster:GetStatMod("MOD_HEALING")
-							local effect = value * RatingBuster:GetStatMod("ADD_HEALING_MOD_SPI") * mod
+							local mod = RatingBusterBronzebeard:GetStatMod("MOD_HEALING")
+							local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_SPI") * mod
 							if floor(abs(effect) * 10 + 0.5) > 0 then
 								tinsert(infoTable, (gsub(L["$value Heal"], "$value", format("%+.1f", effect))))
 							end
 						end
 						if profileDB.showSpellCritFromSpi then
-							local mod = RatingBuster:GetStatMod("ADD_SPELL_CRIT_RATING_MOD_SPI")
+							local mod = RatingBusterBronzebeard:GetStatMod("ADD_SPELL_CRIT_RATING_MOD_SPI")
 							local effect = StatLogic:GetEffectFromRating(value * mod, CR_CRIT_SPELL, calcLevel)
 							if effect > 0 then
 								tinsert(infoTable, (gsub(L["$value% Spell Crit"], "$value", format("%+.2f", effect))))
@@ -3529,7 +3529,7 @@ function RatingBuster:ProcessText(text, tooltip)
 						end
 						local infoTable = {}
 						--if profileDB.showAPFromArmor then
-						local effect = value * RatingBuster:GetStatMod("ADD_AP_MOD_ARMOR") * RatingBuster:GetStatMod("MOD_AP")
+						local effect = value * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_ARMOR") * RatingBusterBronzebeard:GetStatMod("MOD_AP")
 						if floor(abs(effect) * 10 + 0.5) > 0 then
 							tinsert(infoTable, (gsub(L["$value AP"], "$value", format("%+.1f", effect))))
 						end
@@ -3555,9 +3555,9 @@ function RatingBuster:ProcessText(text, tooltip)
 						-- Insert info into text
 						RusLocalstr = gsub(strsub(text, s, e), "%(", "%%(")
 						RusLocalstr = gsub(RusLocalstr, "%)", "%%)")
-						--RatingBuster:Print("Итоговая строка состоит из " .. text .. " в котором " .. strsub(text, s, e) .. " меняется на " .. infoString ..", в итоге " .. gsub(text, RusLocalstr, infoString, 1))
-						--RatingBuster:Print(RusLocalstr)
-						--RatingBuster:Print("-----------------------")
+						--RatingBusterBronzebeard:Print("Итоговая строка состоит из " .. text .. " в котором " .. strsub(text, s, e) .. " меняется на " .. infoString ..", в итоге " .. gsub(text, RusLocalstr, infoString, 1))
+						--RatingBusterBronzebeard:Print(RusLocalstr)
+						--RatingBusterBronzebeard:Print("-----------------------")
 						return (gsub(text, RusLocalstr, infoString, 1)) -- because gsub has 2 return values, but we only want 1
 					end
 					return text
@@ -3629,7 +3629,7 @@ local summaryCalcData = {
 		option = "sumHP",
 		name = "HEALTH",
 		func = function(sum, sumType, link) return ((sum["HEALTH"] or 0) + (sum["STA"] * 10)) *
-				RatingBuster:GetStatMod("MOD_HEALTH") end,
+				RatingBusterBronzebeard:GetStatMod("MOD_HEALTH") end,
 	},
 	-- Intellect - INT
 	{
@@ -3642,7 +3642,7 @@ local summaryCalcData = {
 		option = "sumMP",
 		name = "MANA",
 		func = function(sum, sumType, link) return ((sum["MANA"] or 0) + (sum["INT"] * 15)) *
-				RatingBuster:GetStatMod("MOD_MANA") end,
+				RatingBusterBronzebeard:GetStatMod("MOD_MANA") end,
 	},
 	-- Spirit - SPI
 	{
@@ -3671,11 +3671,11 @@ local summaryCalcData = {
 			local _, int = UnitStat("player", 4)
 			local _, spi = UnitStat("player", 5)
 			return (sum["MANA_REG"] or 0)
-					+ (sum["INT"] * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_INT"))
+					+ (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_INT"))
 					+ (StatLogic:GetNormalManaRegenFromSpi(spi + sum["SPI"], int + sum["INT"], calcLevel)
 							- StatLogic:GetNormalManaRegenFromSpi(spi, int, calcLevel)) *
-					RatingBuster:GetStatMod("ADD_MANA_REG_MOD_NORMAL_MANA_REG")
-					+ summaryFunc["MANA"](sum, sumType, link) * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_MANA")
+					RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_NORMAL_MANA_REG")
+					+ summaryFunc["MANA"](sum, sumType, link) * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_MANA")
 		end,
 	},
 	-- Mana Regen while Not casting - MANA_REG, SPI, INT
@@ -3686,10 +3686,10 @@ local summaryCalcData = {
 			local _, int = UnitStat("player", 4)
 			local _, spi = UnitStat("player", 5)
 			return (sum["MANA_REG"] or 0)
-					+ (sum["INT"] * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_INT"))
+					+ (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_INT"))
 					+ StatLogic:GetNormalManaRegenFromSpi(spi + sum["SPI"], int + sum["INT"], calcLevel)
 					- StatLogic:GetNormalManaRegenFromSpi(spi, int, calcLevel)
-					+ summaryFunc["MANA"](sum, sumType, link) * RatingBuster:GetStatMod("ADD_MANA_REG_MOD_MANA")
+					+ summaryFunc["MANA"](sum, sumType, link) * RatingBusterBronzebeard:GetStatMod("ADD_MANA_REG_MOD_MANA")
 		end,
 	},
 	---------------------
@@ -3707,22 +3707,22 @@ local summaryCalcData = {
 			local ap = (sum["AP"] or 0)
 					+ (sum["STR"] * StatLogic:GetAPPerStr(class))
 					+ (sum["AGI"] * StatLogic:GetAPPerAgi(class))
-			if RatingBuster:GetStatMod("ADD_AP_MOD_STA") ~= 0 then
-				ap = ap + (sum["STA"] * RatingBuster:GetStatMod("ADD_AP_MOD_STA"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_STA") ~= 0 then
+				ap = ap + (sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_STA"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_ARMOR") ~= 0 then
-				ap = ap + (summaryFunc["ARMOR"](sum, sumType, link) * RatingBuster:GetStatMod("ADD_AP_MOD_ARMOR"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_ARMOR") ~= 0 then
+				ap = ap + (summaryFunc["ARMOR"](sum, sumType, link) * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_ARMOR"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_INT") ~= 0 then
-				ap = ap + (sum["INT"] * RatingBuster:GetStatMod("ADD_AP_MOD_INT"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_INT") ~= 0 then
+				ap = ap + (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_INT"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_SPELL_DMG") ~= 0 then
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_SPELL_DMG") ~= 0 then
 				local spellDmg = ((sum["SPELL_DMG"] or 0)
-						+ (sum["STA"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STA"))
-						+ (sum["INT"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_INT"))
-						+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_SPI"))
-						) * RatingBuster:GetStatMod("MOD_SPELL_DMG")
-				ap = ap + (spellDmg * RatingBuster:GetStatMod("ADD_AP_MOD_SPELL_DMG"))
+						+ (sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STA"))
+						+ (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_INT"))
+						+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_SPI"))
+						) * RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
+				ap = ap + (spellDmg * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_SPELL_DMG"))
 			end
 			-- Druid: Predatory Strikes 2,10: Increases 7%/14%/20% of any attack power on your equipped weapon.
 			local p = 0
@@ -3736,7 +3736,7 @@ local summaryCalcData = {
 					p = 0.2
 				end
 			end
-			local mod = RatingBuster:GetStatMod("MOD_AP") + p
+			local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP") + p
 			return ap * mod
 		end,
 	},
@@ -3748,27 +3748,27 @@ local summaryCalcData = {
 			local rap = (sum["RANGED_AP"] or 0)
 					+ (sum["AP"] or 0)
 					+ (sum["AGI"] * StatLogic:GetRAPPerAgi(class))
-			if RatingBuster:GetStatMod("ADD_RANGED_AP_MOD_INT") ~= 0 then
-				rap = rap + (sum["INT"] * RatingBuster:GetStatMod("ADD_RANGED_AP_MOD_INT"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_RANGED_AP_MOD_INT") ~= 0 then
+				rap = rap + (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_RANGED_AP_MOD_INT"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_STA") ~= 0 then
-				rap = rap + (sum["STA"] * RatingBuster:GetStatMod("ADD_AP_MOD_STA"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_STA") ~= 0 then
+				rap = rap + (sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_STA"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_ARMOR") ~= 0 then
-				rap = rap + (summaryFunc["ARMOR"](sum, sumType, link) * RatingBuster:GetStatMod("ADD_AP_MOD_ARMOR"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_ARMOR") ~= 0 then
+				rap = rap + (summaryFunc["ARMOR"](sum, sumType, link) * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_ARMOR"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_INT") ~= 0 then
-				rap = rap + (sum["INT"] * RatingBuster:GetStatMod("ADD_AP_MOD_INT"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_INT") ~= 0 then
+				rap = rap + (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_INT"))
 			end
-			if RatingBuster:GetStatMod("ADD_AP_MOD_SPELL_DMG") ~= 0 then
+			if RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_SPELL_DMG") ~= 0 then
 				local spellDmg = ((sum["SPELL_DMG"] or 0)
-						+ (sum["STA"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STA"))
-						+ (sum["INT"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_INT"))
-						+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_SPI"))
-						) * RatingBuster:GetStatMod("MOD_SPELL_DMG")
-				rap = rap + (spellDmg * RatingBuster:GetStatMod("ADD_AP_MOD_SPELL_DMG"))
+						+ (sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STA"))
+						+ (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_INT"))
+						+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_SPI"))
+						) * RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
+				rap = rap + (spellDmg * RatingBusterBronzebeard:GetStatMod("ADD_AP_MOD_SPELL_DMG"))
 			end
-			return rap * (RatingBuster:GetStatMod("MOD_RANGED_AP") + RatingBuster:GetStatMod("MOD_AP") - 1)
+			return rap * (RatingBusterBronzebeard:GetStatMod("MOD_RANGED_AP") + RatingBusterBronzebeard:GetStatMod("MOD_AP") - 1)
 		end,
 	},
 	-- Feral Attack Power - FERAL_AP, AP, STR, AGI
@@ -3788,7 +3788,7 @@ local summaryCalcData = {
 					p = 0.2
 				end
 			end
-			local mod = RatingBuster:GetStatMod("MOD_AP") + p
+			local mod = RatingBusterBronzebeard:GetStatMod("MOD_AP") + p
 			local fap = summaryFunc["AP"](sum, sumType, link) + (sum["FERAL_AP"] or 0) * mod
 			return fap
 		end,
@@ -4009,32 +4009,32 @@ local summaryCalcData = {
 		name = "SPELL_DMG",
 		func = function(sum, sumType, link)
 			local spellDmg = (sum["SPELL_DMG"] or 0)
-			if RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STR") ~= 0 then
-				spellDmg = spellDmg + (sum["STR"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STR"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STR") ~= 0 then
+				spellDmg = spellDmg + (sum["STR"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STR"))
 			end
-			if RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STA") ~= 0 then
-				spellDmg = spellDmg + (sum["STA"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_STA"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STA") ~= 0 then
+				spellDmg = spellDmg + (sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_STA"))
 			end
-			if RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_INT") ~= 0 then
-				spellDmg = spellDmg + (sum["INT"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_INT"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_INT") ~= 0 then
+				spellDmg = spellDmg + (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_INT"))
 			end
-			if RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_SPI") ~= 0 then
-				spellDmg = spellDmg + (sum["SPI"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_SPI"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_SPI") ~= 0 then
+				spellDmg = spellDmg + (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_SPI"))
 			end
-			if RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_AP") ~= 0 then
-				spellDmg = spellDmg + (summaryFunc["AP"](sum, sumType, link) * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_AP"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_AP") ~= 0 then
+				spellDmg = spellDmg + (summaryFunc["AP"](sum, sumType, link) * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_AP"))
 			end
-			if RatingBuster:GetStatMod("ADD_PET_STA_MOD_STA") ~= 0 then
+			if RatingBusterBronzebeard:GetStatMod("ADD_PET_STA_MOD_STA") ~= 0 then
 				spellDmg = spellDmg +
 						(
-						sum["STA"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_PET_STA") * RatingBuster:GetStatMod("ADD_PET_STA_MOD_STA")
+						sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_PET_STA") * RatingBusterBronzebeard:GetStatMod("ADD_PET_STA_MOD_STA")
 						)
 				spellDmg = spellDmg +
 						(
-						sum["INT"] * RatingBuster:GetStatMod("ADD_SPELL_DMG_MOD_PET_INT") * RatingBuster:GetStatMod("ADD_PET_INT_MOD_INT")
+						sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_DMG_MOD_PET_INT") * RatingBusterBronzebeard:GetStatMod("ADD_PET_INT_MOD_INT")
 						)
 			end
-			return spellDmg * RatingBuster:GetStatMod("MOD_SPELL_DMG")
+			return spellDmg * RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Holy Damage - HOLY_SPELL_DMG, SPELL_DMG,
@@ -4044,8 +4044,8 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			return summaryFunc["SPELL_DMG"](sum, sumType, link)
 					+ ((sum["HOLY_SPELL_DMG"] or 0)
-							+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "HOLY")))
-					* RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "HOLY")))
+					* RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Arcane Damage - ARCANE_SPELL_DMG, SPELL_DMG,
@@ -4055,8 +4055,8 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			return summaryFunc["SPELL_DMG"](sum, sumType, link)
 					+ ((sum["ARCANE_SPELL_DMG"] or 0)
-							+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "ARCANE")))
-					* RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "ARCANE")))
+					* RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Fire Damage - FIRE_SPELL_DMG, SPELL_DMG,
@@ -4066,8 +4066,8 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			return summaryFunc["SPELL_DMG"](sum, sumType, link)
 					+ ((sum["FIRE_SPELL_DMG"] or 0)
-							+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "FIRE")))
-					* RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "FIRE")))
+					* RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Nature Damage - NATURE_SPELL_DMG, SPELL_DMG,
@@ -4077,8 +4077,8 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			return summaryFunc["SPELL_DMG"](sum, sumType, link)
 					+ ((sum["NATURE_SPELL_DMG"] or 0)
-							+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "NATURE")))
-					* RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "NATURE")))
+					* RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Frost Damage - FROST_SPELL_DMG, SPELL_DMG,
@@ -4088,8 +4088,8 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			return summaryFunc["SPELL_DMG"](sum, sumType, link)
 					+ ((sum["FROST_SPELL_DMG"] or 0)
-							+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "FROST")))
-					* RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "FROST")))
+					* RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Shadow Damage - SHADOW_SPELL_DMG, SPELL_DMG, ADD_SCHOOL_SP_MOD_SPI
@@ -4099,8 +4099,8 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			return summaryFunc["SPELL_DMG"](sum, sumType, link)
 					+ ((sum["SHADOW_SPELL_DMG"] or 0)
-							+ (sum["SPI"] * RatingBuster:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "SHADOW")))
-					* RatingBuster:GetStatMod("MOD_SPELL_DMG")
+							+ (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SCHOOL_SP_MOD_SPI", "SHADOW")))
+					* RatingBusterBronzebeard:GetStatMod("MOD_SPELL_DMG")
 		end,
 	},
 	-- Healing - HEAL, AGI, STR, INT, SPI
@@ -4115,25 +4115,25 @@ local summaryCalcData = {
 		name = "HEAL",
 		func = function(sum, sumType, link)
 			local heal = (sum["HEAL"] or 0)
-			if RatingBuster:GetStatMod("ADD_HEALING_MOD_STR") ~= 0 then
-				heal = heal + (sum["STR"] * RatingBuster:GetStatMod("ADD_HEALING_MOD_STR"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_STR") ~= 0 then
+				heal = heal + (sum["STR"] * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_STR"))
 			end
-			if RatingBuster:GetStatMod("ADD_HEALING_MOD_AGI") ~= 0 then
-				heal = heal + (sum["AGI"] * RatingBuster:GetStatMod("ADD_HEALING_MOD_AGI"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_AGI") ~= 0 then
+				heal = heal + (sum["AGI"] * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_AGI"))
 			end
-			if RatingBuster:GetStatMod("ADD_HEALING_MOD_STA") ~= 0 then
-				heal = heal + (sum["STA"] * RatingBuster:GetStatMod("ADD_HEALING_MOD_STA"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_STA") ~= 0 then
+				heal = heal + (sum["STA"] * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_STA"))
 			end
-			if RatingBuster:GetStatMod("ADD_HEALING_MOD_INT") ~= 0 then
-				heal = heal + (sum["INT"] * RatingBuster:GetStatMod("ADD_HEALING_MOD_INT"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_INT") ~= 0 then
+				heal = heal + (sum["INT"] * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_INT"))
 			end
-			if RatingBuster:GetStatMod("ADD_HEALING_MOD_SPI") ~= 0 then
-				heal = heal + (sum["SPI"] * RatingBuster:GetStatMod("ADD_HEALING_MOD_SPI"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_SPI") ~= 0 then
+				heal = heal + (sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_SPI"))
 			end
-			if RatingBuster:GetStatMod("ADD_HEALING_MOD_AP") ~= 0 then
-				heal = heal + (summaryFunc["AP"](sum, sumType, link) * RatingBuster:GetStatMod("ADD_HEALING_MOD_AP"))
+			if RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_AP") ~= 0 then
+				heal = heal + (summaryFunc["AP"](sum, sumType, link) * RatingBusterBronzebeard:GetStatMod("ADD_HEALING_MOD_AP"))
 			end
-			return heal * RatingBuster:GetStatMod("MOD_HEALING")
+			return heal * RatingBusterBronzebeard:GetStatMod("MOD_HEALING")
 		end,
 	},
 	-- Spell Hit Chance - SPELL_HIT_RATING
@@ -4156,7 +4156,7 @@ local summaryCalcData = {
 		name = "SPELL_CRIT",
 		func = function(sum, sumType, link)
 			return StatLogic:GetEffectFromRating((sum["SPELL_CRIT_RATING"] or 0) +
-				sum["SPI"] * RatingBuster:GetStatMod("ADD_SPELL_CRIT_RATING_MOD_SPI"), "SPELL_CRIT_RATING", calcLevel)
+				sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_CRIT_RATING_MOD_SPI"), "SPELL_CRIT_RATING", calcLevel)
 					+ StatLogic:GetSpellCritFromInt(sum["INT"], class, calcLevel)
 		end,
 		ispercent = true,
@@ -4166,7 +4166,7 @@ local summaryCalcData = {
 		option = "sumSpellCritRating",
 		name = "SPELL_CRIT_RATING",
 		func = function(sum, sumType, link) return (sum["SPELL_CRIT_RATING"] or 0) +
-				sum["SPI"] * RatingBuster:GetStatMod("ADD_SPELL_CRIT_RATING_MOD_SPI") end,
+				sum["SPI"] * RatingBusterBronzebeard:GetStatMod("ADD_SPELL_CRIT_RATING_MOD_SPI") end,
 	},
 	-- Spell Haste - SPELL_HASTE_RATING
 	{
@@ -4202,11 +4202,11 @@ local summaryCalcData = {
 			-- local itemType = select(9, GetItemInfo(link))
 			-- local mod = 1
 			-- if not modFreeArmorItemEquipLoc[itemType] then
-			-- mod = RatingBuster:GetStatMod("MOD_ARMOR")
+			-- mod = RatingBusterBronzebeard:GetStatMod("MOD_ARMOR")
 			-- end
-			return (sum["ARMOR"] or 0) * RatingBuster:GetStatMod("MOD_ARMOR")
+			return (sum["ARMOR"] or 0) * RatingBusterBronzebeard:GetStatMod("MOD_ARMOR")
 					+ (sum["ARMOR_BONUS"] or 0) + ((sum["AGI"] or 0) * 2)
-					+ ((sum["INT"] or 0) * RatingBuster:GetStatMod("ADD_ARMOR_MOD_INT"))
+					+ ((sum["INT"] or 0) * RatingBusterBronzebeard:GetStatMod("ADD_ARMOR_MOD_INT"))
 		end,
 	},
 	-- Dodge Chance Before DR - DODGE_RATING, DEFENSE_RATING, AGI
@@ -4252,14 +4252,14 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			if GetParryChance() == 0 then return 0 end
 			local parryRating = (sum["PARRY_RATING"] or 0)
-			if RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR") ~= 0 then
+			if RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR") ~= 0 then
 				if (sumType == "diff1" or sumType == "diff2") then
 					local str = UnitStat("player", 1)
 					local newStr = (sum["STR"] or 0) + str
-					parryRating = parryRating + floor(newStr * RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR")) -
-							floor(str * RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR"))
+					parryRating = parryRating + floor(newStr * RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR")) -
+							floor(str * RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR"))
 				else
-					parryRating = parryRating + (sum["STR"] or 0) * RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR")
+					parryRating = parryRating + (sum["STR"] or 0) * RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR")
 				end
 			end
 			local parry = StatLogic:GetEffectFromRating(parryRating, "PARRY_RATING", calcLevel)
@@ -4292,7 +4292,7 @@ local summaryCalcData = {
 		option = "sumParryRating",
 		name = "PARRY_RATING",
 		func = function(sum, sumType, link) return (sum["PARRY_RATING"] or 0) +
-				(sum["STR"] * RatingBuster:GetStatMod("ADD_CR_PARRY_MOD_STR")) end,
+				(sum["STR"] * RatingBusterBronzebeard:GetStatMod("ADD_CR_PARRY_MOD_STR")) end,
 	},
 	-- Block Chance - BLOCK_RATING, DEFENSE_RATING
 	{
@@ -4318,7 +4318,7 @@ local summaryCalcData = {
 		func = function(sum, sumType, link)
 			if GetBlockChance() == 0 then return 0 end
 			return ((sum["BLOCK_VALUE"] or 0) + ((sum["STR"] or 0) * StatLogic:GetBlockValuePerStr(class))) *
-					RatingBuster:GetStatMod("MOD_BLOCK_VALUE")
+					RatingBusterBronzebeard:GetStatMod("MOD_BLOCK_VALUE")
 
 		end,
 	},
@@ -4595,7 +4595,7 @@ function sumSortAlphaComp(a, b)
 	return a[1] < b[1]
 end
 
-function RatingBuster:StatSummary(tooltip, name, link, ...)
+function RatingBusterBronzebeard:StatSummary(tooltip, name, link, ...)
 	-- Hide stat summary for equipped items
 	if profileDB.sumIgnoreEquipped and IsEquippedItem(link) then return end
 
@@ -4711,7 +4711,7 @@ function RatingBuster:StatSummary(tooltip, name, link, ...)
 		if profileDB.sumShowTitle then
 			tooltip:AddLine(HIGHLIGHT_FONT_COLOR_CODE .. L["Stat Summary"] .. FONT_COLOR_CODE_CLOSE)
 			if profileDB.sumShowIcon then
-				tooltip:AddTexture("Interface\\AddOns\\RatingBuster\\images\\Sigma")
+				tooltip:AddTexture("Interface\\AddOns\\RatingBusterBronzebeard\\images\\Sigma")
 			end
 		end
 		-- local left, right = "", ""
@@ -4766,11 +4766,11 @@ function RatingBuster:StatSummary(tooltip, name, link, ...)
 	end
 	if profileDB.enableStatMods then
 		for _, v in pairs(statData) do
-			v["STR"] = v["STR"] * RatingBuster:GetStatMod("MOD_STR")
-			v["AGI"] = v["AGI"] * RatingBuster:GetStatMod("MOD_AGI")
-			v["STA"] = v["STA"] * RatingBuster:GetStatMod("MOD_STA")
-			v["INT"] = v["INT"] * RatingBuster:GetStatMod("MOD_INT")
-			v["SPI"] = v["SPI"] * RatingBuster:GetStatMod("MOD_SPI")
+			v["STR"] = v["STR"] * RatingBusterBronzebeard:GetStatMod("MOD_STR")
+			v["AGI"] = v["AGI"] * RatingBusterBronzebeard:GetStatMod("MOD_AGI")
+			v["STA"] = v["STA"] * RatingBusterBronzebeard:GetStatMod("MOD_STA")
+			v["INT"] = v["INT"] * RatingBusterBronzebeard:GetStatMod("MOD_INT")
+			v["SPI"] = v["SPI"] * RatingBusterBronzebeard:GetStatMod("MOD_SPI")
 		end
 	end
 	-- Summary Table
@@ -4783,7 +4783,7 @@ function RatingBuster:StatSummary(tooltip, name, link, ...)
 	if profileDB.sumHP then
 		local d = {name = "HEALTH"}
 		for k, sum in pairs(data) do
-			d[k] = ((sum["HEALTH"] or 0) + (sum["STA"] * 10)) * RatingBuster:GetStatMod("MOD_HEALTH")
+			d[k] = ((sum["HEALTH"] or 0) + (sum["STA"] * 10)) * RatingBusterBronzebeard:GetStatMod("MOD_HEALTH")
 		end
 		tinsert(summary, d)
 	end
@@ -4791,7 +4791,7 @@ function RatingBuster:StatSummary(tooltip, name, link, ...)
 		-- Health - HEALTH, STA
 		sumHP = {
 			name = "HEALTH",
-			func = function(sum, sumType, link) return ((sum["HEALTH"] or 0) + (sum["STA"] * 10)) * RatingBuster:GetStatMod("MOD_HEALTH") end,
+			func = function(sum, sumType, link) return ((sum["HEALTH"] or 0) + (sum["STA"] * 10)) * RatingBusterBronzebeard:GetStatMod("MOD_HEALTH") end,
 			ispercent = false,
 		},
 	}
@@ -5007,7 +5007,7 @@ function RatingBuster:StatSummary(tooltip, name, link, ...)
 	if profileDB.sumShowTitle then
 		tooltip:AddLine(HIGHLIGHT_FONT_COLOR_CODE .. L["Stat Summary"] .. FONT_COLOR_CODE_CLOSE)
 		if profileDB.sumShowIcon then
-			tooltip:AddTexture("Interface\\AddOns\\RatingBuster\\images\\Sigma")
+			tooltip:AddTexture("Interface\\AddOns\\RatingBusterBronzebeard\\images\\Sigma")
 		end
 	end
 	for _, o in ipairs(output) do
@@ -5018,13 +5018,13 @@ function RatingBuster:StatSummary(tooltip, name, link, ...)
 	end
 end
 
--- RatingBuster:Bench(1000)
+-- RatingBusterBronzebeard:Bench(1000)
 ---------
 -- self:SplitDoJoin("+24 Agility/+4 Stamina, +4 Dodge and +4 Spell Crit/+5 Spirit", {"/", " and ", ","})
 -- 1000 times: 0.16 - 0.18 without Compost
 -- 1000 times: 0.22 - 0.24 with Compost
 ---------
--- RatingBuster.ProcessTooltip(ItemRefTooltip, link)
+-- RatingBusterBronzebeard.ProcessTooltip(ItemRefTooltip, link)
 -- 1000 times: 0.31 sec - 0.7.6
 -- 1000 times: 0.29 sec - 0.
 -- 1000 times: 0.24 sec - 0.8.58.0
@@ -5032,7 +5032,7 @@ end
 -- strjoin 1000000 times: 0.46
 -- ..      1000000 times: 0.27
 --------------
-function RatingBuster:Bench(k)
+function RatingBusterBronzebeard:Bench(k)
 	local t1 = GetTime()
 	local link = GetInventoryItemLink("player", 12)
 	for i = 1, k, 1 do
@@ -5040,9 +5040,9 @@ function RatingBuster:Bench(k)
 		--self:SplitDoJoin("+24 Agility/+4 Stamina, +4 Dodge and +4 Spell Crit/+5 Spirit", {"/", " and ", ","})
 		---------------------------------------------------------------------------
 		ItemRefTooltip:SetInventoryItem("player", 12)
-		RatingBuster.ProcessTooltip(ItemRefTooltip, link)
+		RatingBusterBronzebeard.ProcessTooltip(ItemRefTooltip, link)
 		---------------------------------------------------------------------------
-		--ItemRefTooltip:SetScript("OnTooltipSetItem", function(frame, ...) RatingBuster:Print("OnTooltipSetItem") end)
+		--ItemRefTooltip:SetScript("OnTooltipSetItem", function(frame, ...) RatingBusterBronzebeard:Print("OnTooltipSetItem") end)
 		----------------------------------------------------------------------
 		--local h = strjoin("", "test", "123")
 		--local h = "test".."123"

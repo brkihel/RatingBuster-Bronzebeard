@@ -1,11 +1,11 @@
 --[[
-Name: RatingBuster koKR locale
+Name: RatingBusterBronzebeard koKR locale
 Revision: $Revision: 282 $
 Translated by:
 - Slowhand, 7destiny, kcgcom, fenlis
 ]]
 
-local L = LibStub("AceLocale-3.0"):NewLocale("RatingBuster", "koKR")
+local L = LibStub("AceLocale-3.0"):NewLocale("RatingBusterBronzebeard", "koKR")
 if not L then return end
 -- This file is coded in UTF-8
 -- If you don't have a editor that can save in UTF-8, I recommend Ultraedit
@@ -16,7 +16,7 @@ if not L then return end
 ---------------
 -- Waterfall --
 ---------------
-L["RatingBuster Options"] = "RatingBuster 설정"
+L["RatingBusterBronzebeard Options"] = "RatingBusterBronzebeard 설정"
 L["Waterfall-1.0 is required to access the GUI."] = "GUI를 표시하려면 Waterfall-1.0 라이브러리가 필요합니다!"
 L["Enabled"] = "사용"
 L["Suspend/resume this addon"] = "이 애드온 중지/다시 시작"
@@ -602,8 +602,8 @@ L["ItemID: "] = "아이템ID: "
 -- In other languages there may be 5 different strings that should all map to CR_CRIT_MELEE.
 -- so please check in game that you have all strings, and not translate directly off this table.
 --
--- Tip1: When doing localizations, I recommend you set debugging to true in RatingBuster.lua
--- Find RatingBuster:SetDebugging(false) and change it to RatingBuster:SetDebugging(true)
+-- Tip1: When doing localizations, I recommend you set debugging to true in RatingBusterBronzebeard.lua
+-- Find RatingBusterBronzebeard:SetDebugging(false) and change it to RatingBusterBronzebeard:SetDebugging(true)
 -- or you can type /rb debug to enable it in game
 --
 -- Tip2: The strings are passed into string.find, so you should escape the magic characters ^$()%.[]*+-? with a %

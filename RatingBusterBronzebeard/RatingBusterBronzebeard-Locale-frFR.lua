@@ -1,11 +1,11 @@
 ﻿--[[
-Name: RatingBuster frFR locale (incomplete)
+Name: RatingBusterBronzebeard frFR locale (incomplete)
 Revision: $Revision: 282 $
 Translated by:
 - Tixu@Curse, Silaor and renchap
 ]]
 
-local L = LibStub("AceLocale-3.0"):NewLocale("RatingBuster", "frFR")
+local L = LibStub("AceLocale-3.0"):NewLocale("RatingBusterBronzebeard", "frFR")
 if not L then return end
 -- This file is coded in UTF-8
 -- If you don't have a editor that can save in UTF-8, I recommend NotePad++ or Ultraedit
@@ -16,7 +16,7 @@ if not L then return end
 ---------------
 -- Waterfall --
 ---------------
-L["RatingBuster Options"] = "Options de RatingBuster"
+L["RatingBusterBronzebeard Options"] = "Options de RatingBusterBronzebeard"
 L["Waterfall-1.0 is required to access the GUI."] = "Waterfall-1.0 est nécessaire pour accéder au GUI."
 L["Enabled"] = "Activé"
 L["Suspend/resume this addon"] = "Active ou non cet addon."
@@ -517,8 +517,8 @@ L["ItemID: "] = "ID de l'objet :"
 -- In other languages there may be 5 different strings that should all map to CR_CRIT_MELEE.
 -- so please check in game that you have all strings, and not translate directly off this table.
 --
--- Tip1: When doing localizations, I recommend you set debugging to true in RatingBuster.lua
--- Find RatingBuster:SetDebugging(false) and change it to RatingBuster:SetDebugging(true)
+-- Tip1: When doing localizations, I recommend you set debugging to true in RatingBusterBronzebeard.lua
+-- Find RatingBusterBronzebeard:SetDebugging(false) and change it to RatingBusterBronzebeard:SetDebugging(true)
 -- or you can type /rb debug to enable it in game
 --
 -- Tip2: The strings are passed into string.find, so you should escape the magic characters ^$()%.[]*+-? with a %
