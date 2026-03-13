@@ -48,7 +48,7 @@ end
 -- Local Variables --
 ---------------------
 local _
-local class = "DRUID"
+local class = select(2, UnitClass("player"))  -- Fix class detection
 local playerLevel = UnitLevel("player") or 80
 local calcLevel
 local profileDB -- Initialized in :OnInitialize()
