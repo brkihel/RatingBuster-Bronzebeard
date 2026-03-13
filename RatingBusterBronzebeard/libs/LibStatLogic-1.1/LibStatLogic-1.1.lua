@@ -5578,7 +5578,7 @@ end
 -- Local Variables --
 ---------------------
 -- Player info
-local playerClass = "DRUID"
+local class = select(2, UnitClass("player")) -- Fix class detection
 local _, playerRace = UnitRace("player")
 
 -- Localize globals
