@@ -2868,6 +2868,11 @@ function RatingBusterBronzebeard.ProcessTooltip(tooltip, name, link, ...)
 						text = RatingBusterBronzebeard:SplitDoJoin(text, separatorTable, tooltip)
 						cache[cacheID] = text
 					end
+					-- Preserve original color for suffix stat sub-lines
+					local origColor = rawText:match("(|c%x+)%+")
+					if origColor and not text:match("^|c") then
+						text = origColor .. text .. "|r"
+					end
 					tinsert(subLines, text)
 				end
 			end
