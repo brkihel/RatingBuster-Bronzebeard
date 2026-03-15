@@ -24,11 +24,11 @@ Features:
 	ItemStatParser - Fast multi level indexing algorithm instead of calling strfind for every stat
 ]]
 
-local MAJOR = "LibStatLogic-1.1"
-
-local StatLogic = LibStub:NewAscensionLibrary(MAJOR)
+local MAJOR = "LibStatLogicBronzebeard"
+local MINOR = 1
+local StatLogic = LibStub:NewLibrary(MAJOR, MINOR)
 if not StatLogic then return end
-
+print("LibStatLogicBronzebeard LOADED")
 
 ----------------------
 -- Version Checking --
@@ -1038,6 +1038,8 @@ PatternLocale.koKR = {
 	-- Strip trailing "."
 	["."] = ".",
 	["DeepScanSeparators"] = {
+		"\r\n", -- Try to catch newline in profession items' extra stats
+		"\n",  -- Try to catch newline in profession items' extra stats
 		"/", -- "+10 Defense Rating/+10 Stamina/+15 Block Value": ZG Enchant
 		--", ", -- "+6 Spell Damage, +5 Spell Crit Rating": Potent Ornate Topaz ID: 28123
 		"%. ", -- "Equip: Increases attack power by 81 when fighting Undead. It also allows the acquisition of Scourgestones on behalf of the Argent Dawn.": Seal of the Dawn
@@ -12619,25 +12621,22 @@ function StatLogic:GetSum(item, table)
 	tip:ClearLines() -- this is required or SetX won't work the second time its called
 	tip:SetHyperlink(link)
 	debugPrint(link)
-	for i = 2, tip:NumLines() do
+for i = 2, tip:NumLines() do
 		if not tip[i] then
 			tip[i] = tip:CreateFontString()
 			tip:AddFontStrings(tip[i], tip:CreateFontString())
 			_G["StatLogicTooltipTextLeft"..i] = tip[i]
 		end
-		local text = tip[i]:GetText() or ""
+		local rawText = tip[i]:GetText() or ""
+		local r, g, b = tip[i]:GetTextColor()
+		rawText = rawText:gsub("\r\n", "\n"):gsub("\r", "\n")
+		for text in (rawText .. "\n"):gmatch("([^\n]*)\n") do
+		if text ~= "" then
 
 		-- Trim spaces
 		text = strtrim(text)
 		-- Strip color codes
-		if strsub(text, -2) == "|r" then
-			text = strsub(text, 1, -3)
-		end
-		if strfind(strsub(text, 1, 10), "|c%x%x%x%x%x%x%x%x") then
-			text = strsub(text, 11)
-		end
-
-		local r, g, b = tip[i]:GetTextColor()
+		text = text:gsub("|c%x+", ""):gsub("|r", "")
 		-----------------------
 		-- Whole Text Lookup --
 		-----------------------
@@ -12658,7 +12657,7 @@ function StatLogic:GetSum(item, table)
 		end
 		-- Fast Exclude --
 		-- Exclude obvious strings that do not need to be checked, also exclude lines that are not white and green and normal (normal for Frozen Wrath bonus)
-		if not (found or L.Exclude[text] or L.Exclude[strutf8sub(text, 1, L.ExcludeLen)] or strsub(text, 1, 1) == '"' or g < 0.8 or (b < 0.99 and b > 0.1)) then
+		if not (found or L.Exclude[text] or L.Exclude[strutf8sub(text, 1, L.ExcludeLen)] or strsub(text, 1, 1) == '"' or g < 0.8 or (b < 0.99 and b > 0.1 and g < 0.85)) then
 			--debugPrint(text.." = ")
 			-- Strip enchant time
 			-- ITEM_ENCHANT_TIME_LEFT_DAYS = "%s (%d day)";
@@ -13020,7 +13019,11 @@ function StatLogic:GetSum(item, table)
 		else
 			--debugPrint("Excluded: "..text)
 		end
+
+		end -- closes if text ~= ""
+		end -- closes gmatch loop
 	end
+	-- Tooltip scanning done
 	-- Tooltip scanning done, do post processing
 	--[[ 3.0.8
 	Bonus Armor: The mechanics for items with bonus armor on them has 
