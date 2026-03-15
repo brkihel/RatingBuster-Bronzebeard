@@ -2,7 +2,7 @@
 ..\FrameXML\UI.xsd">
 
 <Script file="libs\LibStub\LibStub.lua"/>
-<Include file="libs\LibStatLogic-1.1\lib.xml"/>
+<Include file="libs\LibStatLogicBronzebeard\lib.xml"/>
 <Include file="libs\LibTipHooker-1.1\lib.xml"/>
 <Include file="libs\LibBabble-Inventory-3.0\lib.xml"/>
 <Include file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml" />

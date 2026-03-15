@@ -15,7 +15,7 @@ local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local AceDB = LibStub("AceDB-3.0")
 local TipHooker = LibStub("LibTipHooker-1.1")
-local StatLogic = LibStub("LibStatLogic-1.1")
+local StatLogic = LibStub("LibStatLogicBronzebeard")
 local L = LibStub("AceLocale-3.0"):GetLocale("RatingBusterBronzebeard")
 local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
 
