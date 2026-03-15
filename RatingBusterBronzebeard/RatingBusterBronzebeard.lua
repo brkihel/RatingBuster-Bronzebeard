@@ -87,6 +87,7 @@ local ARMOR = ARMOR
 local profileDefault = {
 	hideBlizzardComparisons = true,
 	showItemLevel = true,
+	showItemLevelDiff = false,
 	showItemID = false,
 	useRequiredLevel = true,
 	customLevel = 0,
@@ -708,6 +709,16 @@ local options = {
 					get = getProfileOption,
 					set = setProfileOptionAndClearCache,
 				},
+				itemleveldiff = {
+					type = 'toggle',
+					order = 7,
+					width = "double",
+					name = L["Show Item Level Diff"],
+					desc = L["Show Item Level difference in Stat Summary"],
+					arg = "showItemLevelDiff",
+					get = getProfileOption,
+					set = setProfileOptionAndClearCache,
+},
 				usereqlv = {
 					type = 'toggle',
 					order = 7,
@@ -4431,6 +4442,15 @@ local summaryCalcData = {
 			return parry + dodge + mobMiss + block
 		end,
 		ispercent = true,
+	},
+	-- Item Level Diff (Bronzebeard scaling)
+	{
+		option = "showItemLevelDiff",
+		name = "ITEM_LEVEL",
+		ispercent = false,
+		func = function(sum, sumType, link)
+			return sum["ITEM_LEVEL"] or 0
+		end,
 	},
 }
 if tpSupport == true then

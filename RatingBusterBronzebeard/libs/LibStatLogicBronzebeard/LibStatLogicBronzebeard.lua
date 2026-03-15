@@ -330,6 +330,7 @@ PatternLocale.enUS = {
 	-------------
 	-- Special cases that need to be dealt with before deep scan
 	["PreScanPatterns"] = {
+		["^Item Level (%d+)$"] = "ITEM_LEVEL",
 		--["^Equip: Increases attack power by (%d+) in Cat"] = "FERAL_AP",
 		--["^Equip: Increases attack power by (%d+) when fighting Undead"] = "AP_UNDEAD", -- Seal of the Dawn ID:13029
 		["^Increases attack power by (%d+) in Cat, Bear, Dire Bear, and Moonkin forms only%.$"] = "FERAL_AP", -- 3.0.8 FAP change
@@ -612,6 +613,7 @@ PatternLocale.enUS = {
 		["Increases your expertise rating"] = {"EXPERTISE_RATING"},
 		["Increases armor penetration rating"] = {"ARMOR_PENETRATION_RATING"},
 		["Increases your armor penetration rating"] = {"ARMOR_PENETRATION_RATING"}, -- ID:43178
+		
 
 		-- Exclude
 		["sec"] = false,
@@ -636,6 +638,8 @@ DisplayLocale.enUS = {
 		--[StatID] = {FullName, ShortName},
 		---------------------------------------------------------------------------
 		-- Tier1 Stats - Stats parsed directly off items
+		["ITEM_LEVEL"] = {"Item Level", "iLvL"},
+		
 		["EMPTY_SOCKET_RED"] = {EMPTY_SOCKET_RED, EMPTY_SOCKET_RED}, -- EMPTY_SOCKET_RED = "Red Socket";
 		["EMPTY_SOCKET_YELLOW"] = {EMPTY_SOCKET_YELLOW, EMPTY_SOCKET_YELLOW}, -- EMPTY_SOCKET_YELLOW = "Yellow Socket";
 		["EMPTY_SOCKET_BLUE"] = {EMPTY_SOCKET_BLUE, EMPTY_SOCKET_BLUE}, -- EMPTY_SOCKET_BLUE = "Blue Socket";
