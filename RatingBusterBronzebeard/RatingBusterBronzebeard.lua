@@ -2839,36 +2839,41 @@ function RatingBusterBronzebeard.ProcessTooltip(tooltip, name, link, ...)
 	local tipTextLeft = tooltip:GetName() .. "TextLeft"
 	for i = 2, tooltip:NumLines() do
 		local fontString = _G[tipTextLeft .. i]
-		local text = fontString:GetText()
-		if text then
-			-- Get data from cache if available
-			local cacheID = text .. calcLevel
-			local cacheText = cache[cacheID]
-			if cacheText then
-				if cacheText ~= text then
-					fontString:SetText(cacheText)
-				end
-			elseif EmptySocketLookup[text] and profileDB[EmptySocketLookup[text]].gemText then -- Replace empty sockets with gem text
-				text = profileDB[EmptySocketLookup[text]].gemText
-				cache[cacheID] = text
-				-- SetText
-				fontString:SetText(text)
-			elseif strfind(text, "%d") then -- do nothing if we don't find a number
-				-- Find and set color code (used to fix gem text color) pattern:|cxxxxxxxx
-				currentColorCode = select(3, strfind(text, "(|c%x%x%x%x%x%x%x%x)")) or "|r"
-				-- Initial pattern check, do nothing if not found
-				-- Check for separators and bulid separatorTable
-				local separatorTable = {}
-				for _, sep in ipairs(L["separators"]) do
-					if strfind(text, sep) then
-						tinsert(separatorTable, sep)
+		local rawText = fontString:GetText()
+		if rawText then
+			-- Bronzebeard fix: split \r\n embedded suffix stats into separate sub-lines
+			-- process each independently then rejoin with \r\n for SetText
+			local subLines = {}
+			local normalized = rawText:gsub("\r\n", "\n"):gsub("\r", "\n")
+			for subline in (normalized .. "\n"):gmatch("([^\n]*)\n") do
+				if subline ~= "" then
+					local text = subline
+					local cacheID = text .. calcLevel
+					local cacheText = cache[cacheID]
+					if cacheText then
+						if cacheText ~= text then
+							text = cacheText
+						end
+					elseif EmptySocketLookup[text] and profileDB[EmptySocketLookup[text]].gemText then
+						text = profileDB[EmptySocketLookup[text]].gemText
+						cache[cacheID] = text
+					elseif strfind(text, "%d") then
+						currentColorCode = select(3, strfind(text, "(|c%x%x%x%x%x%x%x%x)")) or "|r"
+						local separatorTable = {}
+						for _, sep in ipairs(L["separators"]) do
+							if strfind(text, sep) then
+								tinsert(separatorTable, sep)
+							end
+						end
+						text = RatingBusterBronzebeard:SplitDoJoin(text, separatorTable, tooltip)
+						cache[cacheID] = text
 					end
+					tinsert(subLines, text)
 				end
-				-- SplitDoJoin
-				text = RatingBusterBronzebeard:SplitDoJoin(text, separatorTable, tooltip)
-				cache[cacheID] = text
-				-- SetText
-				fontString:SetText(text)
+			end
+			local finalText = table.concat(subLines, "\r\n")
+			if finalText ~= rawText then
+				fontString:SetText(finalText)
 			end
 		end
 	end
