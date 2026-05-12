@@ -1,24 +1,24 @@
-Ôªø--[[
-Name: RatingBusterBronzebeard frFR locale (incomplete)
+--[[
+Name: RatingBuster-Bronzebeard frFR locale (incomplete)
 Revision: $Revision: 282 $
 Translated by:
 - Tixu@Curse, Silaor and renchap
 ]]
 
-local L = LibStub("AceLocale-3.0"):NewLocale("RatingBusterBronzebeard", "frFR")
+local L = LibStub("AceLocale-3.0"):NewLocale("RatingBuster-Bronzebeard", "frFR")
 if not L then return end
 -- This file is coded in UTF-8
 -- If you don't have a editor that can save in UTF-8, I recommend NotePad++ or Ultraedit
 ----
 -- To translate AceLocale strings, replace true with the translation string
 -- Before: L["Show Item ID"] = true,
--- After:  L["Show Item ID"] = "È°ØÁ§∫Áâ©ÂìÅÁ∑®Ëôü",
+-- After:  L["Show Item ID"] = "??????",
 ---------------
 -- Waterfall --
 ---------------
-L["RatingBusterBronzebeard Options"] = "Options de RatingBusterBronzebeard"
-L["Waterfall-1.0 is required to access the GUI."] = "Waterfall-1.0 est n√©cessaire pour acc√©der au GUI."
-L["Enabled"] = "Activ√©"
+L["RatingBuster-Bronzebeard Options"] = "Options de RatingBuster-Bronzebeard"
+L["Waterfall-1.0 is required to access the GUI."] = "Waterfall-1.0 est nÈcessaire pour accÈder au GUI."
+L["Enabled"] = "ActivÈ"
 L["Suspend/resume this addon"] = "Active ou non cet addon."
 ---------------------------
 -- Slash Command Options --
@@ -28,20 +28,20 @@ L["ALT Key"] = "Touche ALT"
 L["CTRL Key"] = "Touche CTRL"
 L["SHIFT Key"] = "Touche MAJ"
 L["Never"] = "Jamais"
-L["General Settings"] = "Param√®tres g√©n√©raux"
+L["General Settings"] = "ParamËtres gÈnÈraux"
 L["Profiles"] = "Profiles"
 -- /rb win
-L["Options Window"] = "Options de la fen√™tre"
-L["Shows the Options Window"] = "Affiche la fen√™tre des options"
+L["Options Window"] = "Options de la fenÍtre"
+L["Shows the Options Window"] = "Affiche la fenÍtre des options"
 -- /rb hidebzcomp
 L["Hide Blizzard Item Comparisons"] = "Masquer la comparaison d'objet de Blizzard"
---L["Disable Blizzard stat change summary when using the built-in comparison tooltip"] = true -- √† traduire
+--L["Disable Blizzard stat change summary when using the built-in comparison tooltip"] = true -- ‡ traduire
 -- /rb statmod
 L["Enable Stat Mods"] = "Activer les Stat Mods"
 L["Enable support for Stat Mods"] = "Activer le support pour Stat Mods"
 -- /rb avoidancedr
---L["Enable Avoidance Diminishing Returns"] = true -- √† traduire
---L["Dodge, Parry, Hit Avoidance values will be calculated using the avoidance deminishing return formula with your current stats"] = true -- √† traduire
+--L["Enable Avoidance Diminishing Returns"] = true -- ‡ traduire
+--L["Dodge, Parry, Hit Avoidance values will be calculated using the avoidance deminishing return formula with your current stats"] = true -- ‡ traduire
 -- /rb itemid
 L["Show ItemID"] = "Afficher l'ID de l'objet"
 L["Show the ItemID in tooltips"] = "Affiche l'ID d'un objet dans l'infobulle."
@@ -52,15 +52,15 @@ L["Show the ItemLevel in tooltips"] = "Affiche le niveau de l'objet dans l'infob
 L["Use Required Level"] = "Utiliser le niveau requis"
 L["Calculate using the required level if you are below the required level"] = "Effectue les calculs en utilisant le niveau requis par l'objet si il n'est pas atteint."
 -- /rb level
-L["Set Level"] = "D√©finir le niveau"
-L["Set the level used in calculations (0 = your level)"] = "D√©finir le niveau utilis√© dans les calculs (0 = votre niveau)."
+L["Set Level"] = "DÈfinir le niveau"
+L["Set the level used in calculations (0 = your level)"] = "DÈfinir le niveau utilisÈ dans les calculs (0 = votre niveau)."
 ---------------------------------------------------------------------------
 -- /rb rating
 L["Rating"] = "Score"
 L["Options for Rating display"] = "Options pour l'affichage des scores"
 -- /rb rating show
 L["Show Rating Conversions"] = "Afficher la conversion des scores"
-L["Show Rating conversions in tooltips"] = "Affiche dans l'infobulle les gains apport√©s par le score."
+L["Show Rating conversions in tooltips"] = "Affiche dans l'infobulle les gains apportÈs par le score."
 -- /rb rating spell
 --L["Show Spell Hit/Haste"] = true
 --L["Show Spell Hit/Haste from Hit/Haste Rating"] = true
@@ -68,31 +68,31 @@ L["Show Rating conversions in tooltips"] = "Affiche dans l'infobulle les gains a
 --L["Show Physical Hit/Haste"] = true
 --L["Show Physical Hit/Haste from Hit/Haste Rating"] = true
 -- /rb rating detail
---L["Show Detailed Conversions Text"] = true -- √† traduire
---L["Show detailed text for Resilience and Expertise conversions"] = true -- √† traduire
+--L["Show Detailed Conversions Text"] = true -- ‡ traduire
+--L["Show detailed text for Resilience and Expertise conversions"] = true -- ‡ traduire
 -- /rb rating def
---L["Defense Breakdown"] = true -- √† traduire
+--L["Defense Breakdown"] = true -- ‡ traduire
 --L["Convert Defense into Crit Avoidance, Hit Avoidance, Dodge, Parry and Block"] = true
 -- /rb rating wpn
---L["Weapon Skill Breakdown"] = true -- √† traduire
---L["Convert Weapon Skill into Crit, Hit, Dodge Neglect, Parry Neglect and Block Neglect"] = true -- √† traduire
+--L["Weapon Skill Breakdown"] = true -- ‡ traduire
+--L["Convert Weapon Skill into Crit, Hit, Dodge Neglect, Parry Neglect and Block Neglect"] = true -- ‡ traduire
 -- /rb rating exp
---L["Expertise Breakdown"] = true -- √† traduire
---L["Convert Expertise into Dodge Neglect and Parry Neglect"] = true -- √† traduire
+--L["Expertise Breakdown"] = true -- ‡ traduire
+--L["Convert Expertise into Dodge Neglect and Parry Neglect"] = true -- ‡ traduire
 ---------------------------------------------------------------------------
 -- /rb rating color
 L["Change Text Color"] = "Modifier la couleur du texte"
---L["Changes the color of added text"] = true -- √† traduire
+--L["Changes the color of added text"] = true -- ‡ traduire
 -- /rb rating color pick
-L["Pick Color"] = "S√©lectionner une couleur"
+L["Pick Color"] = "SÈlectionner une couleur"
 L["Pick a color"] = "Choisissez une couleur"
 -- /rb rating color enable
 L["Enable Color"] = true
 L["Enable colored text"] = true
 ---------------------------------------------------------------------------
 -- /rb stat
---L["Stat Breakdown"] = true -- √† traduire
-L["Changes the display of base stats"] = "Modifie l'affichage des caract√©ristiques de base."
+--L["Stat Breakdown"] = true -- ‡ traduire
+L["Changes the display of base stats"] = "Modifie l'affichage des caractÈristiques de base."
 -- /rb stat show
 L["Show Base Stat Conversions"] = "Afficher les conversions pour les statistiques de base"
 L["Show base stat conversions in tooltips"] = "Affiche les conversions pour les statistiques de base dans l'infobulle."
@@ -102,117 +102,117 @@ L["Strength"] = "Force"
 L["Changes the display of Strength"] = "Modifie l'affichage de la force."
 -- /rb stat str ap
 L["Show Attack Power"] = "Afficher la puissance d'attaque"
-L["Show Attack Power from Strength"] = "Affiche la puissance d'attaque apport√© par la force."
+L["Show Attack Power from Strength"] = "Affiche la puissance d'attaque apportÈ par la force."
 -- /rb stat str block
 L["Show Block Value"] = "Afficher le bloquage"
-L["Show Block Value from Strength"] = "Affiche le bloquage apport√© par la force."
+L["Show Block Value from Strength"] = "Affiche le bloquage apportÈ par la force."
 -- /rb stat str dmg
-L["Show Spell Damage"] = "Afficher les d√©gats des sorts"
-L["Show Spell Damage from Strength"] = "Affiche le bonus de d√©gats des sorts apport√© par la force."
+L["Show Spell Damage"] = "Afficher les dÈgats des sorts"
+L["Show Spell Damage from Strength"] = "Affiche le bonus de dÈgats des sorts apportÈ par la force."
 -- /rb stat str heal
 L["Show Healing"] = "Afficher les soins"
-L["Show Healing from Strength"] = "Affiche le bonus aux soins apport√© par la force."
+L["Show Healing from Strength"] = "Affiche le bonus aux soins apportÈ par la force."
 -- /rb stat str parry
 L["Show Parry"] = "Afficher la parade"
-L["Show Parry from Strength"] = "Affiche la parade apport√© par la force."
+L["Show Parry from Strength"] = "Affiche la parade apportÈ par la force."
 ---------------------------------------------------------------------------
 -- /rb stat agi
-L["Agility"] = "Agilit√©"
-L["Changes the display of Agility"] = "Modifie l'affichage de l'agilit√©"
+L["Agility"] = "AgilitÈ"
+L["Changes the display of Agility"] = "Modifie l'affichage de l'agilitÈ"
 -- /rb stat agi crit
 L["Show Crit"] = "Afficher le critique"
-L["Show Crit chance from Agility"] = "Affiche le pourcentage de critique apport√© par l'agilit√©."
+L["Show Crit chance from Agility"] = "Affiche le pourcentage de critique apportÈ par l'agilitÈ."
 -- /rb stat agi dodge
 L["Show Dodge"] = "Afficher l'esquive"
-L["Show Dodge chance from Agility"] = "Affiche le pourcentage d'esquive apport√© par l'agilit√©."
+L["Show Dodge chance from Agility"] = "Affiche le pourcentage d'esquive apportÈ par l'agilitÈ."
 -- /rb stat agi ap
 L["Show Attack Power"] = "Afficher la puissance d'attaque"
-L["Show Attack Power from Agility"] = "Affiche la puissance d'attaque apport√© par l'agilit√©."
+L["Show Attack Power from Agility"] = "Affiche la puissance d'attaque apportÈ par l'agilitÈ."
 -- /rb stat agi rap
-L["Show Ranged Attack Power"] = "Afficher la puissance d'attaque √† distance"
-L["Show Ranged Attack Power from Agility"] = "Affiche la puissance d'attaque √† distance apport√© par l'agilit√©."
+L["Show Ranged Attack Power"] = "Afficher la puissance d'attaque ‡ distance"
+L["Show Ranged Attack Power from Agility"] = "Affiche la puissance d'attaque ‡ distance apportÈ par l'agilitÈ."
 -- /rb stat agi armor
 L["Show Armor"] = "Afficher l'armure"
-L["Show Armor from Agility"] = "Afficher l'armure apport√© par l'agilit√©"
+L["Show Armor from Agility"] = "Afficher l'armure apportÈ par l'agilitÈ"
 -- /rb stat agi heal
 L["Show Healing"] = "Afficher les soins"
-L["Show Healing from Agility"] = "Affiche la parade apport√© par l'agilit√©."
+L["Show Healing from Agility"] = "Affiche la parade apportÈ par l'agilitÈ."
 ---------------------------------------------------------------------------
 -- /rb stat sta
 L["Stamina"] = "Endurance"
 L["Changes the display of Stamina"] = "Modifie l'affichage de l'endurance"
 -- /rb stat sta hp
 L["Show Health"] = "Afficher les points de vies"
-L["Show Health from Stamina"] = "Affiche les points de vies apport√© par l'endurance."
+L["Show Health from Stamina"] = "Affiche les points de vies apportÈ par l'endurance."
 -- /rb stat sta dmg
-L["Show Spell Damage"] = "Afficher les d√©gats des sorts"
-L["Show Spell Damage from Stamina"] = "Affiche le bonus de d√©gats des sorts apport√© par l'endurance."
+L["Show Spell Damage"] = "Afficher les dÈgats des sorts"
+L["Show Spell Damage from Stamina"] = "Affiche le bonus de dÈgats des sorts apportÈ par l'endurance."
 -- /rb stat sta heal
 L["Show Healing"] = "Afficher les soins"
-L["Show Healing from Stamina"] = "Affiche les soins apport√© par l'endurance."
+L["Show Healing from Stamina"] = "Affiche les soins apportÈ par l'endurance."
 -- /rb stat sta ap
 L["Show Attack Power"] = "Afficher la puissance d'attaque"
-L["Show Attack Power from Stamina"] = "Affiche la puissance d'attaque apport√© par l'endurance."
+L["Show Attack Power from Stamina"] = "Affiche la puissance d'attaque apportÈ par l'endurance."
 ---------------------------------------------------------------------------
 -- /rb stat int
 L["Intellect"] = "Intelligence"
 L["Changes the display of Intellect"] = "Modifie l'affichage de l'intelligence"
 -- /rb stat int spellcrit
 L["Show Spell Crit"] = "Afficher le critique des sorts"
-L["Show Spell Crit chance from Intellect"] = "Affiche le critique des sorts apport√© par l'intelligence."
+L["Show Spell Crit chance from Intellect"] = "Affiche le critique des sorts apportÈ par l'intelligence."
 -- /rb stat int mp
 L["Show Mana"] = "Afficher la mana"
-L["Show Mana from Intellect"] = "Affiche la mana apport√© par l'intelligence."
+L["Show Mana from Intellect"] = "Affiche la mana apportÈ par l'intelligence."
 -- /rb stat int dmg
-L["Show Spell Damage"] = "Afficher les d√©gats des sorts"
-L["Show Spell Damage from Intellect"] = "Afficher les d√©gats des sorts apport√© par l'intelligence."
+L["Show Spell Damage"] = "Afficher les dÈgats des sorts"
+L["Show Spell Damage from Intellect"] = "Afficher les dÈgats des sorts apportÈ par l'intelligence."
 -- /rb stat int heal
 L["Show Healing"] = "Afficher les soins"
-L["Show Healing from Intellect"] = "Affiche les soins apport√© par l'intelligence."
+L["Show Healing from Intellect"] = "Affiche les soins apportÈ par l'intelligence."
 -- /rb stat int mp5
 L["Show Mana Regen"] = "Afficher la mana/5sec"
-L["Show Mana Regen while casting from Intellect"] = "Affiche la mana/5sec apport√© par l'intelligence."
+L["Show Mana Regen while casting from Intellect"] = "Affiche la mana/5sec apportÈ par l'intelligence."
 -- /rb stat int mp5nc
 L["Show Mana Regen while NOT casting"] = "Afficher la mana/5sec hors cast"
-L["Show Mana Regen while NOT casting from Intellect"] = "Affiche la mana/sec hors cast apport√© par l'intelligence."
+L["Show Mana Regen while NOT casting from Intellect"] = "Affiche la mana/sec hors cast apportÈ par l'intelligence."
 -- /rb stat int rap
-L["Show Ranged Attack Power"] = "Afficher la puissance d'attaque √† distance"
-L["Show Ranged Attack Power from Intellect"] = "Affiche la puissance d'attaque √† distance apport√© par l'intelligence."
+L["Show Ranged Attack Power"] = "Afficher la puissance d'attaque ‡ distance"
+L["Show Ranged Attack Power from Intellect"] = "Affiche la puissance d'attaque ‡ distance apportÈ par l'intelligence."
 -- /rb stat int armor
 L["Show Armor"] = "Afficher l'armure"
-L["Show Armor from Intellect"] = "Affiche l'armure apport√© par l'intelligence."
+L["Show Armor from Intellect"] = "Affiche l'armure apportÈ par l'intelligence."
 -- /rb stat int ap
 L["Show Attack Power"] = "Afficher la puissance d'attaque"
-L["Show Attack Power from Intellect"] = "Affiche la puissance d'attaque apport√© par l'intelligence."
+L["Show Attack Power from Intellect"] = "Affiche la puissance d'attaque apportÈ par l'intelligence."
 ---------------------------------------------------------------------------
 -- /rb stat spi
 L["Spirit"] = "Esprit"
 L["Changes the display of Spirit"] = "Modifie l'affichage de l'esprit"
 -- /rb stat spi mp5
 L["Show Mana Regen"] = "Afficher la mana/5sec"
-L["Show Mana Regen while casting from Spirit"] = "Affiche la mana/5sec apport√© par l'esprit."
+L["Show Mana Regen while casting from Spirit"] = "Affiche la mana/5sec apportÈ par l'esprit."
 -- /rb stat spi mp5nc
 L["Show Mana Regen while NOT casting"] = "Afficher la mana/5sec hors cast"
-L["Show Mana Regen while NOT casting from Spirit"] = "Affiche la mana/sec hors cast apport√© par l'esprit."
+L["Show Mana Regen while NOT casting from Spirit"] = "Affiche la mana/sec hors cast apportÈ par l'esprit."
 -- /rb stat spi hp5
 L["Show Health Regen"] = "Afficher la vie/5sec"
-L["Show Health Regen from Spirit"] = "Affiche la vie/5sec apport√© par l'esprit."
+L["Show Health Regen from Spirit"] = "Affiche la vie/5sec apportÈ par l'esprit."
 -- /rb stat spi dmg
-L["Show Spell Damage"] = "Afficher les d√©gats des sorts"
-L["Show Spell Damage from Spirit"] = "Afficher les d√©gats des sorts apport√© par l'esprit."
+L["Show Spell Damage"] = "Afficher les dÈgats des sorts"
+L["Show Spell Damage from Spirit"] = "Afficher les dÈgats des sorts apportÈ par l'esprit."
 -- /rb stat spi heal
 L["Show Healing"] = "Afficher les soins"
-L["Show Healing from Spirit"] = "Affiche les soins apport√© par l'esprit."
+L["Show Healing from Spirit"] = "Affiche les soins apportÈ par l'esprit."
 -- /rb stat spi spellcrit
 L["Show Spell Crit"] = "Afficher le critique des sorts"
-L["Show Spell Crit chance from Spirit"] = "Affiche le critique des sorts apport√© par l'esprit."
+L["Show Spell Crit chance from Spirit"] = "Affiche le critique des sorts apportÈ par l'esprit."
 ---------------------------------------------------------------------------
 -- /rb stat armor
 L["Armor"] = "Armure"
 L["Changes the display of Armor"] = "Modifie l'affichage de l'armure"
 -- /rb stat armor ap
 L["Show Attack Power"] = "Afficher la puissance d'attaque"
-L["Show Attack Power from Armor"] = "Affiche la puissance d'attaque apport√© par l'armure"
+L["Show Attack Power from Armor"] = "Affiche la puissance d'attaque apportÈ par l'armure"
 ---------------------------------------------------------------------------
 -- /rb sum
 L["Stat Summary"] = true
@@ -292,7 +292,7 @@ L["Enable to include block chance in Avoidance summary, Disable for only dodge, 
 ---------------------------------------------------------------------------
 -- /rb sum basic
 L["Stat - Basic"] = "Stat - Basic"
-L["Choose basic stats for summary"] = "Choisissez les statistiques de base pour le r√©sum√©."
+L["Choose basic stats for summary"] = "Choisissez les statistiques de base pour le rÈsumÈ."
 -- /rb sum basic hp
 L["Sum Health"] = "Cumul Vie"
 L["Health <- Health, Stamina"] = "Vie <- Vie, Endu"
@@ -312,11 +312,11 @@ L["Ranged Attack Power <- Ranged Attack Power, Intellect, Attack Power, Strength
 L["Sum Feral Attack Power"] = "Cumul PA Farouche"
 L["Feral Attack Power <- Feral Attack Power, Attack Power, Strength, Agility"] = "PA Farouche <- PA Farouche, PA, Force, Agi"
 -- /rb sum stat dmg
-L["Sum Spell Damage"] = "Cumul D√©gats des Sorts"
-L["Spell Damage <- Spell Damage, Intellect, Spirit, Stamina"] = "D√©gats des Sorts <- D√©gats des Sorts, Intel, Esprit, Endu"
+L["Sum Spell Damage"] = "Cumul DÈgats des Sorts"
+L["Spell Damage <- Spell Damage, Intellect, Spirit, Stamina"] = "DÈgats des Sorts <- DÈgats des Sorts, Intel, Esprit, Endu"
 -- /rb sum stat dmgholy
-L["Sum Holy Spell Damage"] = "Cumul DS Sacr√©"
-L["Holy Spell Damage <- Holy Spell Damage, Spell Damage, Intellect, Spirit"] = "DS Sacr√© <- DS Sacr√©, DS, Intel, Esprit"
+L["Sum Holy Spell Damage"] = "Cumul DS SacrÈ"
+L["Holy Spell Damage <- Holy Spell Damage, Spell Damage, Intellect, Spirit"] = "DS SacrÈ <- DS SacrÈ, DS, Intel, Esprit"
 -- /rb sum stat dmgarcane
 L["Sum Arcane Spell Damage"] = "Cumul DS Arcane"
 L["Arcane Spell Damage <- Arcane Spell Damage, Spell Damage, Intellect"] = "DS Arcane <- DS Arcane, DS, Intel"
@@ -363,8 +363,8 @@ L["Health Regen when out of combat <- Spirit"] = "Regen Vie HC <- Esprit"
 L["Sum Armor"] = "Cumul Armure"
 L["Armor <- Armor from items, Armor from bonuses, Agility, Intellect"] = "Armure <- Armure Objets, Armure Bonus, Agi, Intel"
 -- /rb sum stat blockvalue
-L["Sum Block Value"] = "Cumul D√©gats Bloqu√©s"
-L["Block Value <- Block Value, Strength"] = "D√©gats Bloqu√©s <- D√©gats Bloqu√©s, Force"
+L["Sum Block Value"] = "Cumul DÈgats BloquÈs"
+L["Block Value <- Block Value, Strength"] = "DÈgats BloquÈs <- DÈgats BloquÈs, Force"
 -- /rb sum stat dodge
 L["Sum Dodge Chance"] = "Cumul Esquive"
 L["Dodge Chance <- Dodge Rating, Agility, Defense Rating"] = "Esquive <- Score Esquive, Agi, Score Def"
@@ -375,8 +375,8 @@ L["Parry Chance <- Parry Rating, Defense Rating"] = "Parade <- Score Parade, Sco
 L["Sum Block Chance"] = "Cumul Bloquage"
 L["Block Chance <- Block Rating, Defense Rating"] = "Bloquage <- Score Bloquage, Score Def"
 -- /rb sum stat avoidhit
-L["Sum Hit Avoidance"] = "Cumul Rat√©"
-L["Hit Avoidance <- Defense Rating"] = "Rat√© <- Score Def"
+L["Sum Hit Avoidance"] = "Cumul RatÈ"
+L["Hit Avoidance <- Defense Rating"] = "RatÈ <- Score Def"
 -- /rb sum stat avoidcrit
 L["Sum Crit Avoidance"] = "Cumul Def Crit"
 L["Crit Avoidance <- Defense Rating, Resilience"] = "Def Crit <- Score Def, Resilience"
@@ -391,43 +391,43 @@ L["Sum Block Neglect"] = "Cumul Ignore Bloquage"
 L["Block Neglect <- Weapon Skill Rating"] = "Ignore Bloquage <- Score Arme"
 -- /rb sum stat resarcane
 L["Sum Arcane Resistance"] = "Cumul RA"
-L["Arcane Resistance Summary"] = "R√©sum√© de la RA"
+L["Arcane Resistance Summary"] = "RÈsumÈ de la RA"
 -- /rb sum stat resfire
 L["Sum Fire Resistance"] = "Cumul RF"
-L["Fire Resistance Summary"] = "R√©sum√© de la Rf"
+L["Fire Resistance Summary"] = "RÈsumÈ de la Rf"
 -- /rb sum stat resnature
 L["Sum Nature Resistance"] = "Cumul RN"
-L["Nature Resistance Summary"] = "R√©sum√© de la RN"
+L["Nature Resistance Summary"] = "RÈsumÈ de la RN"
 -- /rb sum stat resfrost
 L["Sum Frost Resistance"] = "Cumul RG"
-L["Frost Resistance Summary"] = "R√©sum√© de la RG"
+L["Frost Resistance Summary"] = "RÈsumÈ de la RG"
 -- /rb sum stat resshadow
 L["Sum Shadow Resistance"] = "Cumul RO"
-L["Shadow Resistance Summary"] = "R√©sum√© de la RO"
+L["Shadow Resistance Summary"] = "RÈsumÈ de la RO"
 -- /rb sum stat maxdamage
 L["Sum Weapon Max Damage"] = "Cumul Dommage Arme Max"
-L["Weapon Max Damage Summary"] = "R√©sum√© du Dommage ax de l'Arme"
+L["Weapon Max Damage Summary"] = "RÈsumÈ du Dommage ax de l'Arme"
 -- /rb sum stat weapondps
 --L["Sum Weapon DPS"] = true
 --L["Weapon DPS Summary"] = true
 -- /rb sum statcomp
---L["Stat - Composite"] = "Stats - Compos√©es"
---L["Choose composite stats for summary"] = "Choisir les Stats compos√©es du r√©sum√©"
+--L["Stat - Composite"] = "Stats - ComposÈes"
+--L["Choose composite stats for summary"] = "Choisir les Stats composÈes du rÈsumÈ"
 -- /rb sum statcomp str
 L["Sum Strength"] = "Cumul Force"
-L["Strength Summary"] = "R√©sum√© de la Force"
+L["Strength Summary"] = "RÈsumÈ de la Force"
 -- /rb sum statcomp agi
 L["Sum Agility"] = "Cumul Agi"
-L["Agility Summary"] = "R√©sum√© de l'Agilit√©"
+L["Agility Summary"] = "RÈsumÈ de l'AgilitÈ"
 -- /rb sum statcomp sta
 L["Sum Stamina"] = "Cumul Endu"
-L["Stamina Summary"] = "R√©sum√© de l'Endurance"
+L["Stamina Summary"] = "RÈsumÈ de l'Endurance"
 -- /rb sum statcomp int
 L["Sum Intellect"] = "Cumul Int"
-L["Intellect Summary"] = "R√©sum√© de l'Intelligence"
+L["Intellect Summary"] = "RÈsumÈ de l'Intelligence"
 -- /rb sum statcomp spi
 L["Sum Spirit"] = "Cumul Esprit"
-L["Spirit Summary"] = "R√©sum√© de l'Esprit"
+L["Spirit Summary"] = "RÈsumÈ de l'Esprit"
 -- /rb sum statcomp def
 L["Sum Defense"] = "Cumul Def"
 L["Defense <- Defense Rating"] = "Def <- Score def"
@@ -440,7 +440,7 @@ L["Weapon Skill <- Weapon Skill Rating"] = "Comp Arme <- Score Arme"
 ---------------------------------------------------------------------------
 -- /rb sum gemset
 L["Gem Set"] = "Set de gemme"
-L["Select a gem set to configure"] = "Selectionnez un set de gemme √† configurer."
+L["Select a gem set to configure"] = "Selectionnez un set de gemme ‡ configurer."
 L["Default Gem Set 1"] = "Set de gemme 1"
 L["Default Gem Set 2"] = "Set de gemme 2"
 L["Default Gem Set 3"] = "Set de gemme 3"
@@ -517,8 +517,8 @@ L["ItemID: "] = "ID de l'objet :"
 -- In other languages there may be 5 different strings that should all map to CR_CRIT_MELEE.
 -- so please check in game that you have all strings, and not translate directly off this table.
 --
--- Tip1: When doing localizations, I recommend you set debugging to true in RatingBusterBronzebeard.lua
--- Find RatingBusterBronzebeard:SetDebugging(false) and change it to RatingBusterBronzebeard:SetDebugging(true)
+-- Tip1: When doing localizations, I recommend you set debugging to true in RatingBuster-Bronzebeard.lua
+-- Find RatingBuster-Bronzebeard:SetDebugging(false) and change it to RatingBuster-Bronzebeard:SetDebugging(true)
 -- or you can type /rb debug to enable it in game
 --
 -- Tip2: The strings are passed into string.find, so you should escape the magic characters ^$()%.[]*+-? with a %
@@ -529,7 +529,7 @@ L["numberPatterns"] = {
 	--{pattern = "add.-(%d+)", addInfo = "AfterNumber",}, -- for "add xx stat" type pattern, ex: Adamantite Sharpening Stone ID:23529
 	-- Added [^%%] so that it doesn't match strings like "Increases healing by up to 10% of your total Intellect." [Whitemend Pants] ID:24261
 	-- Added [^|] so that it doesn't match enchant strings (JewelTips)
-	{pattern = "(%d+)([^%d%%|]+)", addInfo = "AfterStat",}, -- [√ß‚Ñ¢¬º√•‚Ä¶‚Ä∞√ß≈°‚Äû√¶≈°‚Äî√•¬Ω¬±√•¬ç‚Äú√•¬•ÀÜ√ß≈∏¬≥] +6√¶¬≥‚Ä¢√®¬°‚Äú√•‚Äö¬∑√•¬Æ¬≥√•¬è≈†5√®‚Ç¨¬ê√•≈†‚Ä∫
+	{pattern = "(%d+)([^%d%%|]+)", addInfo = "AfterStat",}, -- [ÁôºÂÖâÁöÑÊöóÂΩ±ÂçìÂ•àÁü≥] +6Ê≥ïË°ìÂÇ∑ÂÆ≥Âèä5ËÄêÂäõ
 }
 L["separators"] = {
 	"/", " et ", ",", "%. ", " pour ", "&", ":",
@@ -576,7 +576,7 @@ L["statList"] = {
 	{pattern = string.lower(SPELL_STAT3_NAME), id = SPELL_STAT3_NAME}, -- Stamina
 	{pattern = string.lower(SPELL_STAT4_NAME), id = SPELL_STAT4_NAME}, -- Intellect
 	{pattern = string.lower(SPELL_STAT5_NAME), id = SPELL_STAT5_NAME}, -- Spirit
-	{pattern = "score de d√©fense", id = CR_DEFENSE_SKILL},
+	{pattern = "score de dÈfense", id = CR_DEFENSE_SKILL},
 	{pattern = "score d'esquive", id = CR_DODGE},
 	{pattern = "score de blocage", id = CR_BLOCK}, -- block enchant: "+10 Shield Block Rating"
 	{pattern = "score de parade", id = CR_PARRY},
@@ -642,17 +642,17 @@ L["$value HP"] = "$value% PV"
 L["$value MP"] = "$value% PM"
 L["$value AP"] = "$value% PA"
 L["$value RAP"] = "$value% PA dist"
-L["$value Dmg"] = "$value% D√©gats"
+L["$value Dmg"] = "$value% DÈgats"
 L["$value Heal"] = "$value% Soins"
 L["$value Armor"] = "$value% Armure"
 L["$value Block"] = "$value% Blocage"
 L["$value MP5"] = "$value% Mana/5sec"
 L["$value MP5(NC)"] = "$value% Mana/5sec(NC)"
 L["$value HP5"] = "$value% Vie/5sec"
-L["$value to be Dodged/Parried"] = "$value% qui sont esquiv√©s/par√©s"
+L["$value to be Dodged/Parried"] = "$value% qui sont esquivÈs/parÈs"
 L["$value to be Crit"] = "$value% qui sont crit"
-L["$value Crit Dmg Taken"] = "$value% Crit dommage re√ßu"
-L["$value DOT Dmg Taken"] = "$value% DOT dommage re√ßu"
+L["$value Crit Dmg Taken"] = "$value% Crit dommage reÁu"
+L["$value DOT Dmg Taken"] = "$value% DOT dommage reÁu"
 L["$value% Parry"] = "$value% parer"
 -- for hit rating showing both physical and spell conversions
 -- (+1.21%, S+0.98%)
@@ -662,4 +662,4 @@ L["$value Spell"] = "$value% Sort"
 ------------------
 -- Stat Summary --
 ------------------
-L["Stat Summary"] = "R√©sum√© des stats"
+L["Stat Summary"] = "RÈsumÈ des stats"

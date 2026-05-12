@@ -1,12 +1,12 @@
 --[[
-Name: RatingBusterBronzebeard esES locale
+Name: RatingBuster-Bronzebeard esES locale
 Revision: $Revision: 282 $
 Translated by:
 - carahuevo@Curse
 - kaiemg
 ]]
 
-local L = LibStub("AceLocale-3.0"):NewLocale("RatingBusterBronzebeard", "esES")
+local L = LibStub("AceLocale-3.0"):NewLocale("RatingBuster-Bronzebeard", "esES")
 if not L then return end
 -- This file is coded in UTF-8
 -- If you don't have a editor that can save in UTF-8, I recommend Ultraedit
@@ -17,7 +17,7 @@ if not L then return end
 ---------------
 -- Waterfall --
 ---------------
-L["RatingBusterBronzebeard Options"] = "Opciones RatingBusterBronzebeard"
+L["RatingBuster-Bronzebeard Options"] = "Opciones RatingBuster-Bronzebeard"
 L["Waterfall-1.0 is required to access the GUI."] = "Se requiere Waterfall para acceder a la GUI."
 L["Enabled"] = "Activado"
 L["Suspend/resume this addon"] = "Parar/Continuar este accesorio"
@@ -580,8 +580,8 @@ L["ItemID: "] = "IDItem"
 -- In other languages there may be 5 different strings that should all map to CR_CRIT_MELEE.
 -- so please check in game that you have all strings, and not translate directly off this table.
 --
--- Tip1: When doing localizations, I recommend you set debugging to true in RatingBusterBronzebeard.lua
--- Find RatingBusterBronzebeard:SetDebugging(false) and change it to RatingBusterBronzebeard:SetDebugging(true)
+-- Tip1: When doing localizations, I recommend you set debugging to true in RatingBuster-Bronzebeard.lua
+-- Find RatingBuster-Bronzebeard:SetDebugging(false) and change it to RatingBuster-Bronzebeard:SetDebugging(true)
 -- or you can type /rb debug to enable it in game
 --
 -- Tip2: The strings are passed into string.find, so you should escape the magic characters ^$()%.[]*+-? with a %
@@ -717,7 +717,7 @@ L["$value Spell"] = "$value Hech."
 L["Stat Summary"] = "Resumen estad."
 
 
-local MX = LibStub("AceLocale-3.0"):NewLocale("RatingBusterBronzebeard", "esMX")
+local MX = LibStub("AceLocale-3.0"):NewLocale("RatingBuster-Bronzebeard", "esMX")
 for k, v in pairs(L) do
 	MX[k] = v
 end

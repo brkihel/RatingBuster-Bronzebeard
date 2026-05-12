@@ -1,5 +1,5 @@
 --[[
-Name: RatingBusterBronzebeard zhTW locale
+Name: RatingBuster-Bronzebeard zhTW locale
 Revision: $Revision: 282 $
 Translated by:
 - Whitetooth@Cenarius (hotdogee@bahamut.twbbs.org)
@@ -8,7 +8,7 @@ Translated by:
 - mcc
 ]]
 
-local L = LibStub("AceLocale-3.0"):NewLocale("RatingBusterBronzebeard", "zhTW")
+local L = LibStub("AceLocale-3.0"):NewLocale("RatingBuster-Bronzebeard", "zhTW")
 if not L then return end
 -- This file is coded in UTF-8
 -- If you don't have a editor that can save in UTF-8, I recommend Ultraedit
@@ -19,7 +19,7 @@ if not L then return end
 ---------------
 -- Waterfall --
 ---------------
-L["RatingBusterBronzebeard Options"] = "屬性轉換選項"
+L["RatingBuster-Bronzebeard Options"] = "屬性轉換選項"
 L["Waterfall-1.0 is required to access the GUI."] = "需要 Waterfall-1.0 才能使用設定介面。"
 L["Enabled"] = "啟用"
 L["Suspend/resume this addon"] = "暫停/繼續使用這個插件"
@@ -604,8 +604,8 @@ L["ItemID: "] = "物品編號: "
 -- In other languages there may be 5 different strings that should all map to CR_CRIT_MELEE.
 -- so please check in game that you have all strings, and not translate directly off this table.
 --
--- Tip1: When doing localizations, I recommend you set debugging to true in RatingBusterBronzebeard.lua
--- Find RatingBusterBronzebeard:SetDebugging(false) and change it to RatingBusterBronzebeard:SetDebugging(true)
+-- Tip1: When doing localizations, I recommend you set debugging to true in RatingBuster-Bronzebeard.lua
+-- Find RatingBuster-Bronzebeard:SetDebugging(false) and change it to RatingBuster-Bronzebeard:SetDebugging(true)
 -- or you can type /rb debug to enable it in game
 --
 -- Tip2: The strings are passed into string.find, so you should escape the magic characters ^$()%.[]*+-? with a %

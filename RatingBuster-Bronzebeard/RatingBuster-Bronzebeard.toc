@@ -1,11 +1,12 @@
 ## Interface: 30301
-## Title: RatingBusterBronzebeard
+## Title: RatingBuster-Bronzebeard
 ## Notes: Item stat breakdown, analysis and comparison
 ## Notes-zhTW: 裝備數值解析與比較
 ## Author: Whitetooth
 ## Modder: Aramis/Fujoshi, Rusiak for Bronzebeard
 ## X-eMail: hotdogee [at] gmail [dot] com
-## SavedVariables: RatingBusterBronzebeardDB
+## Version: 0.1.0
+## SavedVariables: RatingBuster_BronzebeardDB
 ## OptionalDeps: Ace3, LibTipHooker-1.1, LibStatLogic-1.1, UTF8, LibBabble-Inventory-3.0, LibDualSpec-1.0, TankPoints
 ## X-Embeds: Ace3, LibTipHooker-1.1, LibStatLogic-1.1, UTF8, LibBabble-Inventory-3.0, LibDualSpec-1.0
 ## X-Category: Interface Enhancements
@@ -23,14 +24,17 @@ embeds.xml
 #@end-no-lib-strip@
 
 # Localization Files #
-RatingBusterBronzebeard-Locale-enUS.lua
-RatingBusterBronzebeard-Locale-ruRU.lua
-RatingBusterBronzebeard-Locale-zhCN.lua
-RatingBusterBronzebeard-Locale-zhTW.lua
-RatingBusterBronzebeard-Locale-deDE.lua
-RatingBusterBronzebeard-Locale-frFR.lua
-RatingBusterBronzebeard-Locale-koKR.lua
-RatingBusterBronzebeard-Locale-esES.lua
+RatingBuster-Bronzebeard-Locale-enUS.lua
+RatingBuster-Bronzebeard-Locale-ruRU.lua
+RatingBuster-Bronzebeard-Locale-zhCN.lua
+RatingBuster-Bronzebeard-Locale-zhTW.lua
+RatingBuster-Bronzebeard-Locale-deDE.lua
+RatingBuster-Bronzebeard-Locale-frFR.lua
+RatingBuster-Bronzebeard-Locale-koKR.lua
+RatingBuster-Bronzebeard-Locale-esES.lua
 
 # Core #
-RatingBusterBronzebeard.lua
+Core\Namespace.lua
+Core\Engine.lua
+Core\Tooltip.lua
+Core\Addon.lua
