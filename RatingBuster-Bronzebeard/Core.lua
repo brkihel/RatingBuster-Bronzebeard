@@ -8,7 +8,7 @@ _G.RatingBusterAscension = RBA
 
 RBA.addonName = type(addonName) == "string" and addonName or "RatingBuster-Bronzebeard"
 RBA.title = "RatingBuster-Bronzebeard"
-RBA.version = (type(GetAddOnMetadata) == "function" and GetAddOnMetadata(RBA.addonName, "Version")) or "0.1.1"
+RBA.version = (type(GetAddOnMetadata) == "function" and GetAddOnMetadata(RBA.addonName, "Version")) or "0.1.2"
 RBA.frame = RBA.frame or CreateFrame("Frame")
 RBA.modules = RBA.modules or {}
 RBA.state = RBA.state or {}

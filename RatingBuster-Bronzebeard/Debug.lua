@@ -70,15 +70,30 @@ function DebugModule:DumpLastInspection()
 	if inspection.itemLevel or inspection.info then
 		RBA:Print("ItemLevel: " .. tostring(inspection.itemLevel or (inspection.info and inspection.info.itemLevel) or "n/a"))
 	end
+	if inspection.tooltipMetadata and inspection.tooltipMetadata.tooltipItemLevel then
+		RBA:Print("TooltipItemLevel: " .. tostring(inspection.tooltipMetadata.tooltipItemLevel))
+	end
 	if inspection.info then
 		RBA:Print("EquipSlot: " .. tostring(inspection.info.equipSlot or "n/a"))
+	end
+	if inspection.equipSlot then
+		RBA:Print("ResolvedEquipSlot: " .. tostring(inspection.equipSlot))
+	end
+	if inspection.tooltipMetadata and inspection.tooltipMetadata.tooltipEquipSlot then
+		RBA:Print("TooltipEquipSlot: " .. tostring(inspection.tooltipMetadata.tooltipEquipSlot))
 	end
 
 	self:DumpCapabilities()
 	self:DumpLivePlayerStats()
 	self:DumpTable("Raw ", inspection.rawStats)
+	self:DumpTable("UnmappedRaw ", inspection.unmappedRawStats)
+	self:DumpTable("TooltipParsed ", inspection.parsedTooltipStats)
 	self:DumpTable("Normalized ", inspection.normalizedStats)
 	self:DumpTable("Summary ", inspection.summaryMetrics)
+	for _, key in ipairs(sortedKeys(inspection.tooltipStatConflicts)) do
+		local conflict = inspection.tooltipStatConflicts[key]
+		RBA:Print("Conflict " .. key .. " raw=" .. tostring(conflict.raw) .. " tooltip=" .. tostring(conflict.tooltip))
+	end
 
 	local index
 	for index = 1, #(inspection.tooltipLines or {}) do

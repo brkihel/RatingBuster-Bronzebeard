@@ -9,6 +9,17 @@ local type = type
 local string_match = string.match
 local string_lower = string.lower
 local string_gsub = string.gsub
+local math_abs = math.abs
+
+local function appendUnique(target, value)
+	local index
+	for index = 1, #(target or {}) do
+		if target[index] == value then
+			return
+		end
+	end
+	target[#target + 1] = value
+end
 
 Scanner.RawKeyMap = {
 	ITEM_MOD_STRENGTH_SHORT = "STR",
@@ -118,6 +129,33 @@ Scanner.Patterns = {
 	{ pattern = "^equip: increases your armor by (%d+)%.?$", stat = "BONUS_ARMOR" },
 }
 
+Scanner.TooltipSlotMap = {
+	["head"] = "INVTYPE_HEAD",
+	["neck"] = "INVTYPE_NECK",
+	["shoulder"] = "INVTYPE_SHOULDER",
+	["shirt"] = "INVTYPE_BODY",
+	["chest"] = "INVTYPE_CHEST",
+	["robe"] = "INVTYPE_ROBE",
+	["waist"] = "INVTYPE_WAIST",
+	["legs"] = "INVTYPE_LEGS",
+	["feet"] = "INVTYPE_FEET",
+	["wrist"] = "INVTYPE_WRIST",
+	["hands"] = "INVTYPE_HAND",
+	["finger"] = "INVTYPE_FINGER",
+	["trinket"] = "INVTYPE_TRINKET",
+	["back"] = "INVTYPE_CLOAK",
+	["one-hand"] = "INVTYPE_WEAPON",
+	["main hand"] = "INVTYPE_WEAPONMAINHAND",
+	["off hand"] = "INVTYPE_WEAPONOFFHAND",
+	["held in off-hand"] = "INVTYPE_HOLDABLE",
+	["two-hand"] = "INVTYPE_2HWEAPON",
+	["shield"] = "INVTYPE_SHIELD",
+	["ranged"] = "INVTYPE_RANGED",
+	["thrown"] = "INVTYPE_THROWN",
+	["relic"] = "INVTYPE_RELIC",
+	["tabard"] = "INVTYPE_TABARD",
+}
+
 local function addStat(target, key, value)
 	value = tonumber(value)
 	if not key or not value or value == 0 then
@@ -162,27 +200,43 @@ function Scanner:GetTooltipLinesForLink(link, sourceTooltip)
 	return lines
 end
 
-function Scanner:NormalizeRawStats(rawStats, normalizedStats)
+function Scanner:NormalizeRawStats(rawStats, normalizedStats, unmappedRawStats)
 	local key
 	for key in pairs(rawStats or {}) do
 		local mapped = self.RawKeyMap[key]
 		if mapped and not string_match(mapped, "^EMPTY_SOCKET_") then
 			addStat(normalizedStats, mapped, rawStats[key])
+		elseif unmappedRawStats and not string_match(key, "^EMPTY_SOCKET_") then
+			unmappedRawStats[key] = rawStats[key]
 		end
 	end
 end
 
-function Scanner:ParseTooltipLines(lines, normalizedStats)
+function Scanner:ParseTooltipLines(lines, parsedStats, metadata)
 	local index
 	for index = 1, #lines do
 		local rawText = lines[index]
 		local text = string_lower(string_gsub(string_gsub(rawText, "|c%x%x%x%x%x%x%x%x", ""), "|r", ""))
+		local itemLevel = string_match(text, "^item level (%d+)$")
+		if itemLevel then
+			metadata.tooltipItemLevel = tonumber(itemLevel)
+		end
+
+		local requiredLevel = string_match(text, "^requires level (%d+)$")
+		if requiredLevel then
+			metadata.requiredLevel = tonumber(requiredLevel)
+		end
+
+		if self.TooltipSlotMap[text] then
+			metadata.tooltipEquipSlot = self.TooltipSlotMap[text]
+		end
+
 		local patternIndex
 		for patternIndex = 1, #self.Patterns do
 			local pattern = self.Patterns[patternIndex]
 			local value = string_match(text, pattern.pattern)
 			if value then
-				addStat(normalizedStats, pattern.stat, value)
+				addStat(parsedStats, pattern.stat, value)
 			end
 		end
 	end
@@ -214,20 +268,55 @@ function Scanner:ScanItemLink(link, sourceTooltip)
 		playerLevel = UnitLevel("player") or 80,
 		rawStats = RBA.Compat and RBA.Compat:GetItemStats(link) or {},
 		normalizedStats = {},
+		parsedTooltipStats = {},
+		unmappedRawStats = {},
+		tooltipMetadata = {},
+		tooltipStatConflicts = {},
 		tooltipLines = self:GetTooltipLinesForLink(link, sourceTooltip),
 		gems = RBA.Compat and RBA.Compat:GetItemGems(link) or {},
 		researchNotes = {},
 	}
 
-	self:NormalizeRawStats(scan.rawStats, scan.normalizedStats)
-	self:ParseTooltipLines(scan.tooltipLines, scan.normalizedStats)
+	self:NormalizeRawStats(scan.rawStats, scan.normalizedStats, scan.unmappedRawStats)
+	self:ParseTooltipLines(scan.tooltipLines, scan.parsedTooltipStats, scan.tooltipMetadata)
+
+	local key
+	for key in pairs(scan.parsedTooltipStats) do
+		local parsedValue = scan.parsedTooltipStats[key]
+		local rawValue = scan.normalizedStats[key]
+		if rawValue == nil then
+			scan.normalizedStats[key] = parsedValue
+		elseif math_abs((rawValue or 0) - (parsedValue or 0)) > 0.001 then
+			scan.tooltipStatConflicts[key] = {
+				raw = rawValue,
+				tooltip = parsedValue,
+			}
+		end
+	end
+
+	scan.equipSlot = info.equipSlot or scan.tooltipMetadata.tooltipEquipSlot
+	if not scan.itemLevel and scan.tooltipMetadata.tooltipItemLevel then
+		scan.itemLevel = scan.tooltipMetadata.tooltipItemLevel
+	end
+
+	if scan.itemLevel and scan.tooltipMetadata.tooltipItemLevel and scan.itemLevel ~= scan.tooltipMetadata.tooltipItemLevel then
+		appendUnique(scan.researchNotes, "GetItemInfo item level differs from the visible tooltip item level for this item, which suggests BronzeBeard-specific scaling behavior still needs validation.")
+	end
+
+	if info.equipSlot == nil and scan.tooltipMetadata.tooltipEquipSlot then
+		appendUnique(scan.researchNotes, "GetItemInfo did not provide an equip slot for this item, so compare fallback is using the visible tooltip slot.")
+	end
 
 	if RBA:GetDB().ignoreEnchants or RBA:GetDB().ignoreGems or RBA:GetDB().ignoreSocketBonus then
-		scan.researchNotes[#scan.researchNotes + 1] = RBA.Compat.ResearchNotes.ignoreLinkMutators
+		appendUnique(scan.researchNotes, RBA.Compat.ResearchNotes.ignoreLinkMutators)
 	end
 
 	if next(scan.rawStats or {}) == nil then
-		scan.researchNotes[#scan.researchNotes + 1] = "GetItemStats returned no documented payload for this item, so the current result depends on tooltip text parsing."
+		appendUnique(scan.researchNotes, "GetItemStats returned no documented payload for this item, so the current result depends on tooltip text parsing.")
+	end
+
+	if next(scan.unmappedRawStats or {}) ~= nil then
+		appendUnique(scan.researchNotes, "GetItemStats exposed raw keys that are not mapped yet; inspect the dump before deciding whether they should affect tooltip output.")
 	end
 
 	if RBA.ItemCache then

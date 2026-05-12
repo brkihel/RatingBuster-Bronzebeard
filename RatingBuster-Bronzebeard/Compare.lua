@@ -48,19 +48,22 @@ local function buildDiff(baseMetrics, compareMetrics)
 	return diff
 end
 
-function Compare:GetCandidateSlots(link)
-	local info = RBA.Compat and RBA.Compat:GetItemInfo(link) or nil
-	if not info then
-		return nil
+function Compare:GetCandidateSlots(scanOrLink)
+	local equipSlot
+	if type(scanOrLink) == "table" then
+		equipSlot = scanOrLink.equipSlot or (scanOrLink.info and scanOrLink.info.equipSlot)
+	elseif RBA.Compat then
+		local info = RBA.Compat:GetItemInfo(scanOrLink)
+		equipSlot = info and info.equipSlot or nil
 	end
-	return self.SlotMap[info.equipSlot]
+	return self.SlotMap[equipSlot]
 end
 
 function Compare:Build(scan)
 	scan.compareTextPrimary = nil
 	scan.compareTextSecondary = nil
 
-	local slots = self:GetCandidateSlots(scan.link)
+	local slots = self:GetCandidateSlots(scan)
 	if not slots or not RBA.Compat then
 		return
 	end
