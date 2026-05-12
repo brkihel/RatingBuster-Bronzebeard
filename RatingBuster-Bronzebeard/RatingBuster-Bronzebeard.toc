@@ -5,8 +5,8 @@
 ## Author: Whitetooth
 ## Modder: Aramis/Fujoshi, Rusiak for Bronzebeard
 ## X-eMail: hotdogee [at] gmail [dot] com
-## Version: 0.1.0
-## SavedVariables: RatingBuster_BronzebeardDB
+## Version: 0.1.1
+## SavedVariables: RatingBusterAscensionDB
 ## OptionalDeps: Ace3, LibTipHooker-1.1, LibStatLogic-1.1, UTF8, LibBabble-Inventory-3.0, LibDualSpec-1.0, TankPoints
 ## X-Embeds: Ace3, LibTipHooker-1.1, LibStatLogic-1.1, UTF8, LibBabble-Inventory-3.0, LibDualSpec-1.0
 ## X-Category: Interface Enhancements
@@ -23,18 +23,17 @@ UTF8\utf8.lua
 embeds.xml
 #@end-no-lib-strip@
 
-# Localization Files #
-RatingBuster-Bronzebeard-Locale-enUS.lua
-RatingBuster-Bronzebeard-Locale-ruRU.lua
-RatingBuster-Bronzebeard-Locale-zhCN.lua
-RatingBuster-Bronzebeard-Locale-zhTW.lua
-RatingBuster-Bronzebeard-Locale-deDE.lua
-RatingBuster-Bronzebeard-Locale-frFR.lua
-RatingBuster-Bronzebeard-Locale-koKR.lua
-RatingBuster-Bronzebeard-Locale-esES.lua
-
 # Core #
-Core\Namespace.lua
-Core\Engine.lua
-Core\Tooltip.lua
-Core\Addon.lua
+Core.lua
+Compatibility.lua
+ItemCache.lua
+Debug.lua
+Ratings.lua
+Stats.lua
+Scanner.lua
+Compare.lua
+Config.lua
+Tooltip.lua
+
+# Locale #
+Locales\enUS.lua
