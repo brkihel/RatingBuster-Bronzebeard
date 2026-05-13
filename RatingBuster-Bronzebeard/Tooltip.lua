@@ -68,7 +68,7 @@ function Tooltip:ProcessTooltip(tooltip)
 		if db.showItemID and scan.itemID then
 			self:AddLineSafe(tooltip, "Item ID: " .. scan.itemID, 0.75, 0.75, 0.75)
 		end
-		if db.showItemLevel and scan.itemLevel then
+		if db.showItemLevel and scan.itemLevel and not (scan.tooltipMetadata and scan.tooltipMetadata.tooltipItemLevel) then
 			self:AddLineSafe(tooltip, "Item Level: " .. scan.itemLevel, 0.75, 0.75, 0.75)
 		end
 
@@ -108,6 +108,9 @@ function Tooltip:ProcessTooltip(tooltip)
 
 		if db.debug then
 			self:AddLineSafe(tooltip, RBA.L.Debug .. ": " .. tooltip:GetName(), 1.0, 0.50, 0.50)
+			if scan.apiItemLevel and scan.tooltipMetadata and scan.tooltipMetadata.tooltipItemLevel and scan.apiItemLevel ~= scan.tooltipMetadata.tooltipItemLevel then
+				self:AddLineSafe(tooltip, "API Item Level: " .. scan.apiItemLevel, 1.0, 0.65, 0.35)
+			end
 			for index = 1, #(scan.researchNotes or {}) do
 				self:AddLineSafe(tooltip, RBA.L.ResearchPending .. ": " .. scan.researchNotes[index], 1.0, 0.50, 0.50)
 			end

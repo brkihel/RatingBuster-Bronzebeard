@@ -263,7 +263,7 @@ function Scanner:ScanItemLink(link, sourceTooltip)
 		link = link,
 		itemID = tonumber(string_match(link, "item:(%d+)")),
 		info = info,
-		itemLevel = RBA.Compat and RBA.Compat:GetItemLevel(link) or info.itemLevel,
+		apiItemLevel = RBA.Compat and RBA.Compat:GetItemLevel(link) or info.itemLevel,
 		classToken = select(2, UnitClass("player")) or "WARRIOR",
 		playerLevel = UnitLevel("player") or 80,
 		rawStats = RBA.Compat and RBA.Compat:GetItemStats(link) or {},
@@ -295,11 +295,9 @@ function Scanner:ScanItemLink(link, sourceTooltip)
 	end
 
 	scan.equipSlot = info.equipSlot or scan.tooltipMetadata.tooltipEquipSlot
-	if not scan.itemLevel and scan.tooltipMetadata.tooltipItemLevel then
-		scan.itemLevel = scan.tooltipMetadata.tooltipItemLevel
-	end
+	scan.itemLevel = scan.tooltipMetadata.tooltipItemLevel or scan.apiItemLevel
 
-	if scan.itemLevel and scan.tooltipMetadata.tooltipItemLevel and scan.itemLevel ~= scan.tooltipMetadata.tooltipItemLevel then
+	if scan.apiItemLevel and scan.tooltipMetadata.tooltipItemLevel and scan.apiItemLevel ~= scan.tooltipMetadata.tooltipItemLevel then
 		appendUnique(scan.researchNotes, "GetItemInfo item level differs from the visible tooltip item level for this item, which suggests BronzeBeard-specific scaling behavior still needs validation.")
 	end
 

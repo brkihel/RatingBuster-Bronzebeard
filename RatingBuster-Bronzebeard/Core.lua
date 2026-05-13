@@ -8,7 +8,7 @@ _G.RatingBusterAscension = RBA
 
 RBA.addonName = type(addonName) == "string" and addonName or "RatingBuster-Bronzebeard"
 RBA.title = "RatingBuster-Bronzebeard"
-RBA.version = (type(GetAddOnMetadata) == "function" and GetAddOnMetadata(RBA.addonName, "Version")) or "0.1.2"
+RBA.version = (type(GetAddOnMetadata) == "function" and GetAddOnMetadata(RBA.addonName, "Version")) or "0.1.3"
 RBA.frame = RBA.frame or CreateFrame("Frame")
 RBA.modules = RBA.modules or {}
 RBA.state = RBA.state or {}
@@ -34,6 +34,7 @@ local tonumber = tonumber
 local table_concat = table.concat
 local string_format = string.format
 local math_floor = math.floor
+local math_abs = math.abs
 
 local function copyDefaults(target, defaults)
 	local key
@@ -110,6 +111,14 @@ function RBA:FormatMetric(name, value)
 	end
 
 	local metricType = self.Stats and self.Stats.SummaryMetricTypes and self.Stats.SummaryMetricTypes[name] or "flat"
+	if metricType == "percent" or metricType == "rating" then
+		if math_abs(tonumber(value) or 0) < 0.005 then
+			return nil
+		end
+	elseif math_abs(tonumber(value) or 0) < 0.5 then
+		return nil
+	end
+
 	if metricType == "percent" then
 		return name .. " " .. self:FormatSigned(value, 2, "%")
 	end

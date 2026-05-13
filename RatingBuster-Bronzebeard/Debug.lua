@@ -67,11 +67,14 @@ function DebugModule:DumpLastInspection()
 	RBA:Print("Link: " .. tostring(inspection.link))
 	RBA:Print("ItemID: " .. tostring(inspection.itemID or "n/a"))
 	RBA:Print("Tooltip: " .. tostring(inspection.tooltipName or "n/a"))
-	if inspection.itemLevel or inspection.info then
-		RBA:Print("ItemLevel: " .. tostring(inspection.itemLevel or (inspection.info and inspection.info.itemLevel) or "n/a"))
+	if inspection.itemLevel then
+		RBA:Print("ItemLevel: " .. tostring(inspection.itemLevel))
 	end
 	if inspection.tooltipMetadata and inspection.tooltipMetadata.tooltipItemLevel then
 		RBA:Print("TooltipItemLevel: " .. tostring(inspection.tooltipMetadata.tooltipItemLevel))
+	end
+	if inspection.apiItemLevel then
+		RBA:Print("ApiItemLevel: " .. tostring(inspection.apiItemLevel))
 	end
 	if inspection.info then
 		RBA:Print("EquipSlot: " .. tostring(inspection.info.equipSlot or "n/a"))

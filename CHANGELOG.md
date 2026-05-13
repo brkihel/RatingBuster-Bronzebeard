@@ -24,3 +24,9 @@ This project follows semantic versioning.
 - Stopped tooltip text parsing from double-counting stats on top of `GetItemStats`; tooltip parsing now fills gaps and highlights conflicts instead.
 - Added debug visibility for unmapped raw stat keys, tooltip-parsed stats, slot fallback, visible tooltip item level and raw-versus-tooltip stat conflicts.
 - Added compare fallback to use the visible tooltip equip slot when `GetItemInfo` does not expose one for the inspected item.
+
+## 0.1.3 - 2026-05-12
+
+- Hid meaningless zero-only summary and compare fragments such as `Armor 0` or `Mana 0`.
+- Preferred the visible tooltip item level for display while preserving the API item level in debug output when scaled items disagree.
+- Avoided adding a duplicate `Item Level` line when the base BronzeBeard tooltip already shows one.
