@@ -3,8 +3,8 @@
 ## Notes: Item stat breakdown, analysis and comparison
 ## Notes-zhTW: 裝備數值解析與比較
 ## Author: Whitetooth
-## Modder: Aramis/Fujoshi, Rusiak for Bronzebeard
-## X-eMail: hotdogee [at] gmail [dot] com
+## Modder: Aramis/Fujoshi, Rusiak for Bronzebeard/BRKiHeL
+## X-eMail: diegomacedo [at] gmail [dot] com
 ## Version: 0.1.3
 ## SavedVariables: RatingBusterAscensionDB
 ## OptionalDeps: Ace3, LibTipHooker-1.1, LibStatLogic-1.1, UTF8, LibBabble-Inventory-3.0, LibDualSpec-1.0, TankPoints
